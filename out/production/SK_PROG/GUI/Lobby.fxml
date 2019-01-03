@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LobbyController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b6c2cd" height="350.0" layoutX="77.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="317.0" />
+      <Label fx:id="gracz1" layoutX="77.0" layoutY="125.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="gracz2" layoutX="77.0" layoutY="195.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="gracz3" layoutX="77.0" layoutY="265.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="gracz4" layoutX="77.0" layoutY="335.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
+      <Label fx:id="gracz5" layoutX="77.0" layoutY="405.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

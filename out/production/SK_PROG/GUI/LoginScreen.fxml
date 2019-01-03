@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreenController">
+   <children>
+      <Button layoutX="138.0" layoutY="256.0" mnemonicParsing="false" onAction="#conect" text="connect" />
+      <TextField fx:id="nikcField" layoutX="233.0" layoutY="256.0" />
+   </children>
+</AnchorPane>
