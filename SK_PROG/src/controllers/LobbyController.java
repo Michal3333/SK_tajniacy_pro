@@ -1,6 +1,11 @@
 package controllers;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -17,6 +22,7 @@ public class LobbyController extends MainContoller implements Initializable {
     public Label gracz4;
     public Label gracz5;
     public int labels;
+    public Button rozpocznijButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -27,6 +33,9 @@ public class LobbyController extends MainContoller implements Initializable {
             Stale.getWk().logIn();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if(Stale.getRk().getMaster() != 1){
+            rozpocznijButton.setDisable(true);
         }
 
     }
@@ -65,6 +74,26 @@ public class LobbyController extends MainContoller implements Initializable {
     @Override
     public void setAsMaster(){
         gracz1.textFillProperty().setValue(Color.ALICEBLUE);
+    }
+
+    public void rozpocznij(ActionEvent actionEvent) throws IOException {
+        Stale.getWk().rozpocznijGre();
+    }
+
+    @Override
+    public void przejdzDalej(){
+        try {
+            LoginScreenController.stage.setScene(utwurzGre());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private Scene utwurzGre() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
     }
 }
 

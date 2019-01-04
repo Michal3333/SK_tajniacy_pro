@@ -66,6 +66,9 @@ public class ReadKlien implements Runnable{
             master = 1;
             Platform.runLater(() -> page.setAsMaster());
         }
+        if(firstletter.equals("r")){
+            Platform.runLater(()->page.przejdzDalej());
+        }
 //        Platform.runLater(() -> page.czytaj());
 
     }

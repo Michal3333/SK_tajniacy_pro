@@ -32,9 +32,6 @@ void obsluz(char polecenie, int sender){
                 char tabtemp[20];
                 write(1,"w1",2);
                 strcpy(tabtemp, temp.c_str());
-
-
-
                 write(playersFd[i], tabtemp, temp.size());
                 write(1, tabtemp, temp.size());
                 write(1,"\n",1);
@@ -56,6 +53,11 @@ void obsluz(char polecenie, int sender){
             write(sender, tabtemp, playersNicks[i].size());
             write(1, tabtemp, playersNicks[i].size());
             write(1,"\n",1);
+        }
+    }
+    else if (polecenie == 'r' ){
+        for(int i =0; i< numberPlayer;i++){
+            write(playersFd[i],"r",1);
         }
     }
 }
