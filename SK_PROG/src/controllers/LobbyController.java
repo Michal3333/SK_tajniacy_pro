@@ -2,6 +2,8 @@ package controllers;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import sample.Stale;
 
 import java.io.IOException;
@@ -29,23 +31,40 @@ public class LobbyController extends MainContoller implements Initializable {
 
     }
     @Override
-    public void uzupenijGracza(){
+    public void uzupenijGracza(int playerType){
         if(labels == 2){
             gracz2.setText(Stale.getRk().getWiad());
             labels++;
+            if(playerType == 1){
+                gracz2.textFillProperty().setValue(Color.ALICEBLUE);
+            }
         }
         else if(labels == 3){
             gracz3.setText(Stale.getRk().getWiad());
             labels++;
+            if(playerType == 1){
+                gracz3.textFillProperty().setValue(Color.ALICEBLUE);
+            }
         }
         else if(labels == 4){
             gracz5.setText(Stale.getRk().getWiad());
             labels++;
+            if(playerType == 1){
+                gracz4.textFillProperty().setValue(Color.ALICEBLUE);
+            }
         }
         else if(labels == 5){
             gracz5.setText(Stale.getRk().getWiad());
             labels++;
+            if(playerType == 1){
+                gracz5.textFillProperty().setValue(Color.ALICEBLUE);
+            }
         }
+    }
+
+    @Override
+    public void setAsMaster(){
+        gracz1.textFillProperty().setValue(Color.ALICEBLUE);
     }
 }
 

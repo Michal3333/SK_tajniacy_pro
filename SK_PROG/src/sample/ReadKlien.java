@@ -14,12 +14,14 @@ public class ReadKlien implements Runnable{
     private byte [] tab;
     private String wiad;
     private MainContoller page;
+    private int master;
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
         tab = new byte[16];
         wiad = "";
         page = page1;
+        master = 0;
     }
     public void read() throws IOException {
         while(true){
@@ -55,11 +57,22 @@ public class ReadKlien implements Runnable{
         firstletter = wiad.substring(0,1);
         wiad = wiad.substring(1,wiad.length());
         if(firstletter.equals("l")){
-            Platform.runLater(() -> page.uzupenijGracza());
+            Platform.runLater(() -> page.uzupenijGracza(0));
+        }
+        if(firstletter.equals("s")){
+            Platform.runLater(() -> page.uzupenijGracza(1));
+        }
+        if(firstletter.equals("m")){
+            master = 1;
+            Platform.runLater(() -> page.setAsMaster());
         }
 //        Platform.runLater(() -> page.czytaj());
 
     }
+
+    public int getMaster() { return master; }
+
+    public void setMaster(int master) { this.master = master; }
 
     public String getWiad() {
         return wiad;

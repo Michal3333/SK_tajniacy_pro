@@ -16,9 +16,13 @@
 using namespace std;
 int playersFd[10];
 string playersNicks[10];
-int currentPlayer;
+int currentPlayer ;
 int numberPlayer;
 string temp;
+void ustawMainPlayera(int nr){
+    currentPlayer = nr;
+    write(playersFd[nr],"m",1);
+}
 
 void obsluz(char polecenie, int sender){
     if(polecenie == 'l'){
@@ -28,6 +32,9 @@ void obsluz(char polecenie, int sender){
                 char tabtemp[20];
                 write(1,"w1",2);
                 strcpy(tabtemp, temp.c_str());
+
+
+
                 write(playersFd[i], tabtemp, temp.size());
                 write(1, tabtemp, temp.size());
                 write(1,"\n",1);
@@ -41,6 +48,11 @@ void obsluz(char polecenie, int sender){
             char tabtemp[20];
             write(1,"w2",2);
             strcpy(tabtemp, playersNicks[i].c_str());
+
+            if( i == currentPlayer){
+                tabtemp[0] = 's';
+            }
+
             write(sender, tabtemp, playersNicks[i].size());
             write(1, tabtemp, playersNicks[i].size());
             write(1,"\n",1);
@@ -79,7 +91,12 @@ int main() {
                 epoll_ctl(epollfd, EPOLL_CTL_ADD, userfd, &ee);
                 playersFd[numberPlayer]= userfd;
                 numberPlayer++;
-//                write(userfd, buffer, 20);
+
+                if(numberPlayer == 1){
+                    write(1,"---",3);
+                    ustawMainPlayera(0);
+                }
+
             }
             else{
                 write(1,"r",1);

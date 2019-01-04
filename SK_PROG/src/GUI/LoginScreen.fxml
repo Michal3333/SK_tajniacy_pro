@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginScreenController">
    <children>
-      <Button layoutX="138.0" layoutY="256.0" mnemonicParsing="false" onAction="#conect" text="connect" />
+      <Button fx:id="button" layoutX="138.0" layoutY="256.0" mnemonicParsing="false" onAction="#conect" text="connect" />
       <TextField fx:id="nikcField" layoutX="233.0" layoutY="256.0" />
    </children>
 </AnchorPane>
