@@ -13,16 +13,15 @@ public class ReadKlien implements Runnable{
     private byte [] tab;
     private String wiad;
     private MainContoller page;
-
-
+    private int master;
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
         tab = new byte[16];
         wiad = "";
         page = page1;
+        master = 0;
     }
-
     public void read() throws IOException {
         while(true){
             System.out.println("niezepsulem");
@@ -35,12 +34,9 @@ public class ReadKlien implements Runnable{
                 String temp = new String(tab);
                 temp = temp.substring(0,len);
                 wiad = temp;
-                System.out.println(wiad);
+                System.out.println(wiad); // wypisywanie co  dostalismy
                 action();
                 }
-
-
-
         }
     }
 
@@ -57,11 +53,32 @@ public class ReadKlien implements Runnable{
         firstletter = wiad.substring(0,1);
         wiad = wiad.substring(1,wiad.length());
         if(firstletter.equals("l")){
-            Platform.runLater(() -> page.uzupenijGracza());
+            Platform.runLater(() -> page.uzupenijGracza(0));
+        }
+        if(firstletter.equals("s")){
+            Platform.runLater(() -> page.uzupenijGracza(1));
+        }
+        if(firstletter.equals("m")){
+            master = 1;
+            Platform.runLater(() -> page.setAsMaster());
+        }
+        if(firstletter.equals("g")){ //game
+        if(master==1)
+            Platform.runLater(() -> {
+                try {
+                    page.launchGame();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }); ;
         }
 //        Platform.runLater(() -> page.czytaj());
 
     }
+
+    public int getMaster() { return master; }
+
+    public void setMaster(int master) { this.master = master; }
 
     public String getWiad() {
         return wiad;

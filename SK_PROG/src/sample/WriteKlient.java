@@ -20,6 +20,10 @@ public class WriteKlient {
         wiadomosc = ("l" + nick).getBytes();
         os.write(wiadomosc);
     }
+    public void gotowosc() throws IOException { //wysyłamy serwerowi wiadomość o naszej gotowości
+        wiadomosc = "j".getBytes();
+        os.write(wiadomosc);
+    }
 
     public String getNick() {
         return nick;
