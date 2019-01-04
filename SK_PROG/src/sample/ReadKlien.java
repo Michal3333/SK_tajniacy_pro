@@ -2,7 +2,6 @@ package sample;
 
 import controllers.LoginScreenController;
 import controllers.MainContoller;
-import controllers.LobbyController;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -14,6 +13,8 @@ public class ReadKlien implements Runnable{
     private byte [] tab;
     private String wiad;
     private MainContoller page;
+
+
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
@@ -21,6 +22,7 @@ public class ReadKlien implements Runnable{
         wiad = "";
         page = page1;
     }
+
     public void read() throws IOException {
         while(true){
             System.out.println("niezepsulem");

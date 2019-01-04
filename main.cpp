@@ -74,7 +74,7 @@ int main() {
             if(events[i].data.fd == serwersock){
                 write(1,"1\n",2);
                 userfd = accept(serwersock, (struct sockaddr*) &sck_user, &ntmp );
-                ee.events = EPOLLIN ;
+                ee.events = EPOLLIN;
                 ee.data.fd = userfd;
                 epoll_ctl(epollfd, EPOLL_CTL_ADD, userfd, &ee);
                 playersFd[numberPlayer]= userfd;
