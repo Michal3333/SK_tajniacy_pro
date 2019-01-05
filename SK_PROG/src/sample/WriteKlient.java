@@ -33,6 +33,11 @@ public class WriteKlient {
         this.nick = nick;
     }
 
+    public void rozpocznijGre() throws IOException {
+        wiadomosc = "r".getBytes();
+        os.write(wiadomosc);
+    }
+
     public OutputStream getOs() {
         return os;
     }

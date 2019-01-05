@@ -2,11 +2,14 @@ package sample;
 
 import controllers.LoginScreenController;
 import controllers.MainContoller;
+import controllers.LobbyController;
 import javafx.application.Platform;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadKlien implements Runnable{
     private InputStream is;
@@ -14,10 +17,18 @@ public class ReadKlien implements Runnable{
     private String wiad;
     private MainContoller page;
     private int master;
+    private ArrayList<String> slowa;
+    private ArrayList<String> rigAns;
+    private ArrayList<String> wrAns;
+
+
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
-        tab = new byte[16];
+        tab = new byte[41];
+        slowa = new ArrayList<String>();
+        rigAns= new ArrayList<String>();
+        wrAns = new ArrayList<String>();
         wiad = "";
         page = page1;
         master = 0;
@@ -34,7 +45,8 @@ public class ReadKlien implements Runnable{
                 String temp = new String(tab);
                 temp = temp.substring(0,len);
                 wiad = temp;
-                System.out.println(wiad); // wypisywanie co  dostalismy
+                System.out.println("Długość odebranej wiadomści=" + len);
+                System.out.println(wiad);
                 action();
                 }
         }
@@ -62,15 +74,14 @@ public class ReadKlien implements Runnable{
             master = 1;
             Platform.runLater(() -> page.setAsMaster());
         }
-        if(firstletter.equals("g")){ //game
-        if(master==1)
-            Platform.runLater(() -> {
-                try {
-                    page.launchGame();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }); ;
+        if(firstletter.equals("r")){
+            Platform.runLater(()->page.przejdzDalej());
+        }
+        if(firstletter.equals("k")) {
+            Platform.runLater(()->page.czytajSlowa());
+        }
+        if(firstletter.equals("a")){
+            Platform.runLater(()->page.ustawKlucz());
         }
 //        Platform.runLater(() -> page.czytaj());
 
@@ -103,6 +114,31 @@ public class ReadKlien implements Runnable{
     public void setTab(byte[] tab) {
         this.tab = tab;
     }
+
+    public List<String> getSlowa() {
+        return slowa;
+    }
+
+    public void setSlowa(ArrayList<String> slowa) {
+        this.slowa = slowa;
+    }
+
+    public ArrayList<String> getRigAns() {
+        return rigAns;
+    }
+
+    public void setRigAns(ArrayList<String> rigAns) {
+        this.rigAns = rigAns;
+    }
+
+    public ArrayList<String> getWrAns() {
+        return wrAns;
+    }
+
+    public void setWrAns(ArrayList<String> wrAns) {
+        this.wrAns = wrAns;
+    }
+
 
     public void ropocnij(){
         Stale.start(new Thread(this));

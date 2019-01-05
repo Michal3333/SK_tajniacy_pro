@@ -8,4 +8,7 @@ public abstract class MainContoller {
     public void setAsMaster(){}
     public void wypelnijPrzyciski(){}
     public void updatePrzyciski(){}
+    public void przejdzDalej(){}
+    public void czytajSlowa(){}
+    public void ustawKlucz(){}
 }

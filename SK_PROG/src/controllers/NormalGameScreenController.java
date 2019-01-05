@@ -2,9 +2,10 @@ package controllers;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import sample.Stale;
-
+import resources.Words;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -37,7 +38,33 @@ public class NormalGameScreenController extends MainContoller implements Initial
         for(int i = 0; i < 20; i++){
           tabela.getChildren().get(i).setDisable(true);
         }
+//        Label label = tabela.getChildren().get(1).;
     }
+    @Override
+    public void czytajSlowa(){
+        String slowo;
+        for(int i=0; i<20; i++){
+            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
+            System.out.println(slowo);
+            Stale.getRk().getSlowa().add(slowo);
+            //tabela.getChildren().get(i).setAccessibleText(slowo);
+        }
+    }
+    @Override
+    public void ustawKlucz() {
+        String slowo;
+        for (int i = 0; i < 9; i++) {
+            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
+            Stale.getRk().getRigAns().add(slowo);
+        }
+        for (int i=9; i<13; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
+        {
+            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
+            Stale.getRk().getWrAns().add(slowo);
+        }
+        System.out.println("uzupełniłem rozwiązania");
+    }
+
 
     public void wypelnijPrzyciski(){
 

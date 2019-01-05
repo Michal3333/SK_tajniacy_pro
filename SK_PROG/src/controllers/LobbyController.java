@@ -1,5 +1,6 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -7,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import javafx.scene.paint.Paint;
 import sample.Stale;
 
 import java.io.IOException;
@@ -15,14 +16,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LobbyController extends MainContoller implements Initializable {
-    public static Stage stage;
     public Label gracz1;
     public Label gracz2;
     public Label gracz3;
     public Label gracz4;
     public Label gracz5;
     public int labels;
-    public Button rozpocznij;
+    public Button rozpocznijButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,6 +33,9 @@ public class LobbyController extends MainContoller implements Initializable {
             Stale.getWk().logIn();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if(Stale.getRk().getMaster() != 1){
+            rozpocznijButton.setDisable(true);
         }
 
     }
@@ -67,43 +70,30 @@ public class LobbyController extends MainContoller implements Initializable {
             }
         }
     }
-    public void gotowy(javafx.event.ActionEvent actionEvent) throws InterruptedException, IOException { //when all players are ready, launch game
-        if(rozpocznij.getText().equals("rozpocznij"))
-        {
-            rozpocznij.setText("gotowy");
-            rozpocznij.setStyle("-fx-background-color: #00ff00");
-        }
-        else{
-            rozpocznij.setText("rozpocznij");
-            rozpocznij.setStyle("-fx-background-color: #ffffff");
-        }
-        rozpocznij.setDisable(true);
-        Thread.sleep(150);
-        rozpocznij.setDisable(false);
-
-        Stale.getWk().gotowosc();
-
-        //wiadomość do serwera
-    }
-    @Override
-    public void launchGame() throws IOException {
-        Stale.getRk().ropocnij();
-        LobbyController.stage.setScene(utworzGre());
-    }
-    private Scene utworzGre() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        return scene;
-    }
-
-
 
     @Override
     public void setAsMaster(){
         gracz1.textFillProperty().setValue(Color.ALICEBLUE);
     }
 
+    public void rozpocznij(ActionEvent actionEvent) throws IOException {
+        Stale.getWk().rozpocznijGre();
+    }
 
+    @Override
+    public void przejdzDalej(){
+        try {
+            LoginScreenController.stage.setScene(utwurzGre());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private Scene utwurzGre() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
 }
 
