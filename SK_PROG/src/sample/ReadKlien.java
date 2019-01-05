@@ -17,18 +17,18 @@ public class ReadKlien implements Runnable{
     private String wiad;
     private MainContoller page;
     private int master;
-    private ArrayList<String> slowa;
-    private ArrayList<String> rigAns;
-    private ArrayList<String> wrAns;
+    private ArrayList<Integer> slowa;
+    private ArrayList<Integer> rigAns;
+    private ArrayList<Integer> wrAns;
 
 
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
         tab = new byte[41];
-        slowa = new ArrayList<String>();
-        rigAns= new ArrayList<String>();
-        wrAns = new ArrayList<String>();
+        slowa = new ArrayList<Integer>();
+        rigAns= new ArrayList<Integer>();
+        wrAns = new ArrayList<Integer>();
         wiad = "";
         page = page1;
         master = 0;
@@ -115,27 +115,27 @@ public class ReadKlien implements Runnable{
         this.tab = tab;
     }
 
-    public List<String> getSlowa() {
+    public List<Integer> getSlowa() {
         return slowa;
     }
 
-    public void setSlowa(ArrayList<String> slowa) {
+    public void setSlowa(ArrayList<Integer> slowa) {
         this.slowa = slowa;
     }
 
-    public ArrayList<String> getRigAns() {
+    public ArrayList<Integer> getRigAns() {
         return rigAns;
     }
 
-    public void setRigAns(ArrayList<String> rigAns) {
+    public void setRigAns(ArrayList<Integer> rigAns) {
         this.rigAns = rigAns;
     }
 
-    public ArrayList<String> getWrAns() {
+    public ArrayList<Integer> getWrAns() {
         return wrAns;
     }
 
-    public void setWrAns(ArrayList<String> wrAns) {
+    public void setWrAns(ArrayList<Integer> wrAns) {
         this.wrAns = wrAns;
     }
 

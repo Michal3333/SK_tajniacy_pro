@@ -42,28 +42,43 @@ public class NormalGameScreenController extends MainContoller implements Initial
     }
     @Override
     public void czytajSlowa(){
-        String slowo;
+        Integer slowo;
         for(int i=0; i<20; i++){
-            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
-            System.out.println(slowo);
+            slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
             Stale.getRk().getSlowa().add(slowo);
             //tabela.getChildren().get(i).setAccessibleText(slowo);
         }
     }
     @Override
     public void ustawKlucz() {
-        String slowo;
+        Integer slowo;
         for (int i = 0; i < 9; i++) {
-            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
+            slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
             Stale.getRk().getRigAns().add(slowo);
         }
         for (int i=9; i<13; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
         {
-            slowo=Words.words.get(Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2)));
+            slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
             Stale.getRk().getWrAns().add(slowo);
         }
         System.out.println("uzupełniłem rozwiązania");
     }
+    public String slowoAsText(Integer index){
+        return Words.words.get(index);
+    }
+    public boolean isRight(Integer index){
+        for(Integer i : Stale.getRk().getRigAns()) {
+            if(index == i) return true;
+        }
+        return false;
+    }
+    public boolean isWrong(Integer index){
+        for(Integer i : Stale.getRk().getWrAns()) {
+            if(index == i) return true;
+        }
+        return false;
+    }
+
 
 
     public void wypelnijPrzyciski(){

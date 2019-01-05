@@ -30,6 +30,19 @@ void ustawMainPlayera(int nr){
     write(playersFd[nr],"m",1);
 }
 
+void setTable(char *tab, string option){
+    string number;
+    strcpy(tab, option.c_str());
+    for (int i = 0; i < 20; i++) {
+        if (numbers[i] < 10) {
+            number = '0' + to_string(numbers[i]);
+        }
+        else
+        {number = to_string(numbers[i]);}
+        strcpy(tab + (1 + 2 * i), number.c_str());
+    }
+}
+
 void obsluz(char polecenie, int sender){
     if(polecenie == 'l'){
         int current;
@@ -80,16 +93,7 @@ void obsluz(char polecenie, int sender){
             }
 
         char tabtemp[41];
-        tabtemp[0] = 'k';
-        string number;
-        for (int i = 0; i < 20; i++) {
-        if (numbers[i] < 10) {
-            number = '0' + to_string(numbers[i]);
-        }
-        else
-            {number = to_string(numbers[i]);}
-        strcpy(tabtemp + (1 + 2 * i), number.c_str());
-        }
+        setTable(tabtemp, "k");
 
         for(int i=1; i<41;i+=2) {
             cout << tabtemp[i] << tabtemp[i+1] << " " << endl;
@@ -100,16 +104,11 @@ void obsluz(char polecenie, int sender){
         }
 
         random_shuffle(&numbers[0], &numbers[19]); //przemieszanie tablicy
+        int pom=numbers[0];
+        numbers[0]=numbers[19];
+        numbers[19]=pom;   //ostatnia była zawsze ta sama, teraz jest losowa
         //goodAnswers 0-8, bad 9-13, neutral 14-19
-        tabtemp[0] = 'a';
-        for (int i = 0; i < 20; i++) {
-            if (numbers[i] < 10) {
-                number = '0' + to_string(numbers[i]);
-            }
-            else
-            {number = to_string(numbers[i]);}
-            strcpy(tabtemp + (1 + 2 * i), number.c_str());
-        }
+        setTable(tabtemp, "a");
         for(int i=0;i<numberPlayer;i++) {
             write(playersFd[i], tabtemp, 41);   //wysyłanie klucza
         }
