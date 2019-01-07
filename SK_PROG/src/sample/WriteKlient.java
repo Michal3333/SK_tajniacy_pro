@@ -21,18 +21,35 @@ public class WriteKlient {
         os.write(wiadomosc);
     }
 
-    public String getNick() {
-        return nick;
-    }
-
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
 
     public void rozpocznijGre() throws IOException {
         wiadomosc = "r".getBytes();
         os.write(wiadomosc);
     }
+
+    public void wyslijPodpowiedz(String podpowiedz, int ilosc) throws IOException {
+        wiadomosc = ("h" + Integer.toString(ilosc) + podpowiedz).getBytes();
+        os.write(wiadomosc);
+    }
+
+    public void koniecCzasu() throws IOException {
+        wiadomosc = "e".getBytes();
+        os.write(wiadomosc);
+    }
+
+    public void wyslijOdpowiedz(String odp) throws IOException {
+        if(Stale.getRk().getRunda()==0){
+            wiadomosc = ("o" + odp).getBytes();
+        }
+        else if(Stale.getRk().getRunda()==1)
+        wiadomosc = ("p" + odp).getBytes();
+        os.write(wiadomosc);
+
+    }
+
+    public String getNick() { return nick; }
+
+    public void setNick(String nick) { this.nick = nick; }
 
     public OutputStream getOs() {
         return os;

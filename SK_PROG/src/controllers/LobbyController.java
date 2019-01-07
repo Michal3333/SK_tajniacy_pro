@@ -82,15 +82,30 @@ public class LobbyController extends MainContoller implements Initializable {
 
     @Override
     public void przejdzDalej(){
-        try {
-            LoginScreenController.stage.setScene(utwurzGre());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(Stale.getRk().getMaster() == 0) {
+            try {
+                LoginScreenController.stage.setScene(utwurzGre());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
+        else if(Stale.getRk().getMaster() == 1){
+            try {
+                LoginScreenController.stage.setScene(utwurzGreMain());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
     private Scene utwurzGre() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+
+    private Scene utwurzGreMain() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LeaderScreen.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         return scene;
