@@ -49,6 +49,6 @@
     </GridPane>
     <TextField fx:id="hint" layoutX="64.0" layoutY="67.0" prefWidth="204.0" />
     <TextField fx:id="numberOfWords" layoutX="300.0" layoutY="67.0" prefWidth="50.0" />
-    <Button  fx:id="play" layoutX="403.0" layoutY="52.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="130.0" text="Give hint" />
+    <Button  fx:id="play" layoutX="403.0" layoutY="52.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="130.0" onAction="#wyslijPod" text="Give hint" />
   </children>
 </AnchorPane>
