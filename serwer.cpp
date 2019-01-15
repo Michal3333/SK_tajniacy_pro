@@ -26,11 +26,19 @@ int numbers[20];
 int status = 0;
 int tabodp[20];
 int iloscpodpowiedzi;
+int player;
 
+int ktoryGracz(int fd){ //returns logical index of player with diven descriptor
+    for(int i =0; i < numberPlayer; i++)
+    {
+        if(fd==playersFd[i]) return i;
+    }
+    printf("zla ta funkcja chyba w takim razie");
+}
 
 void ustawMainPlayera(int nr){
     currentPlayer = nr;
-    write(playersFd[nr],"m",1);
+    write(playersFd[nr],"m,",2);
 }
 void zeruj(){
     for(int i = 0; i < 20; i++){
@@ -79,6 +87,7 @@ void obsluz(char polecenie, int sender) {
             if (playersFd[i] != sender) {
                 char tabtemp[20];
                 write(1, "w1", 2);
+                temp=temp+','; // PRZECINEK
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
                 write(1, tabtemp, temp.size());
@@ -91,7 +100,8 @@ void obsluz(char polecenie, int sender) {
         for (int i = 0; i < current; i++) {
             char tabtemp[20];
             write(1, "w2", 2);
-            strcpy(tabtemp, playersNicks[i].c_str());
+            string nickname = playersNicks[i]+',';// PRZECINEK
+            strcpy(tabtemp, nickname.c_str());
 
             if (i == currentPlayer) {
                 tabtemp[0] = 's';
@@ -118,15 +128,16 @@ void obsluz(char polecenie, int sender) {
             } else i--;
         }
 
-        char tabtemp[41];
-        setTable(tabtemp, "k");
+        char tabtemp[42];
 
+        setTable(tabtemp, "k");
+        tabtemp[41]=',';        // PRZECINEK
         for (int i = 1; i < 41; i += 2) {
             cout << tabtemp[i] << tabtemp[i + 1] << " " << endl;
         }
         //send the numbers
         for (int i = 0; i < numberPlayer; i++) {
-            write(playersFd[i], tabtemp, 41);
+            write(playersFd[i], tabtemp, 42);
         }
 
         random_shuffle(&numbers[0], &numbers[19]); //przemieszanie tablicy
@@ -135,9 +146,11 @@ void obsluz(char polecenie, int sender) {
         numbers[19] = pom;   //ostatnia była zawsze ta sama, teraz jest losowa
         //goodAnswers 0-8, bad 9-13, neutral 14-19
         setTable(tabtemp, "a");
+        tabtemp[41]=',';        // PRZECINEK
         for (int i = 0; i < numberPlayer; i++) {
-            write(playersFd[i], tabtemp, 41);   //wysyłanie klucza
+            write(playersFd[i], tabtemp, 42);   //wysyłanie klucza
         }
+
     } else if (polecenie == 'h') {
         status = 1;
 
@@ -149,7 +162,8 @@ void obsluz(char polecenie, int sender) {
                 write(playersFd[i], tabtemp, temp.size());
             }
         }
-        write(playersFd[currentPlayer], "t", 1);
+        write(playersFd[currentPlayer], "t,", 2);  // PRZECINEK
+
     } else if (polecenie == 'o') {
         if (status == 1) {
             int odpowiedz;
@@ -175,9 +189,9 @@ void obsluz(char polecenie, int sender) {
             status = 2;
             temp = podlicz();
             zeruj();
-            temp = 'd' + temp;
+            temp = 'd' + temp + ',';  // PRZECINEK
             for (int i = 0; i < numberPlayer; i++) {
-                char tabtemp[20];
+                char tabtemp[21];
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
             }
@@ -186,16 +200,12 @@ void obsluz(char polecenie, int sender) {
             status = 0;
             temp = podlicz();
             zeruj();
-            temp = 'w' + temp;
+            temp = 'w' + temp + ','; // PRZECINEK
             for (int i = 0; i < numberPlayer; i++) {
                 char tabtemp[20];
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
-
-
             }
-
-
         }
     }
 }
@@ -208,6 +218,9 @@ int main() {
     int userfd;
     int odp;
     int ewait;
+    char savedMsgBuffer[5][40];
+    int savedMsgLength[5];
+    for(int i=0;i<5;i++) savedMsgLength[i]=0;
     char buffer[40] = "dodano";
     sck_addr.sin_family = AF_INET;
     sck_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -245,10 +258,37 @@ int main() {
                 odp = read(events[i].data.fd,buffer, 40);
                 temp = buffer;
                 temp = temp.substr(0,odp);
+
+                if(temp[odp-1]==',') //jeśli cała wiadomość została już dosłana
+                {
+                    write(1,"cała wiad\n", 10);
+                if(savedMsgLength==0) { // i jest to cała wiadomość
+                    temp=temp.substr(0,odp-1); //bez przecinka
+                    obsluz(buffer[0], events[i].data.fd);
+                    write(1, buffer, odp);
+                    write(1, "\n", 1);
+                }
+                else   {
+                    temp=temp.substr(0,odp-1); //bez przecinka
+                    player = ktoryGracz(events[i].data.fd); //który gracz? (0-4) (mamy fd, nie mamy ich "uszeregowanych")
+
+                    strcpy(savedMsgBuffer[player] + savedMsgLength[player], temp.c_str()); //dopisujemy ogon
+
+                    savedMsgLength[player]+=odp-1; //bez przecinka!
+                    temp=savedMsgBuffer[player]; //wkładamy całą wiadomość do temp
+                    temp=temp.substr(0, savedMsgLength[player]); //i bierzemy tylko tę, która nas interesuje
+                    savedMsgLength[player]=0; //i nic już nie pamiętamy!
+                    obsluz(temp[0], events[i].data.fd);
+
+                }
+                }
 //                write(events[i].data.fd, buffer,odp);
-                obsluz(buffer[0], events[i].data.fd);
-                write(1,buffer,odp);
-                write(1,"\n",1);
+                else{       //jeśli tylko czesc
+
+                strcpy(savedMsgBuffer[player] + savedMsgLength[player], temp.c_str()); //dopisujemy
+                savedMsgLength[player]+=odp; //tyle teraz mamy
+                /* mam wrażenie że tu coś jeszcze powinno być, ale na ten moment nie wpadło mi do głowy */
+                }
             }
         }
     }

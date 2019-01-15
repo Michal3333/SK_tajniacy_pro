@@ -2,7 +2,6 @@ package sample;
 
 import controllers.LoginScreenController;
 import controllers.MainContoller;
-import controllers.LobbyController;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -17,6 +16,8 @@ public class ReadKlien implements Runnable{
     private String wiad;
     private MainContoller page;
     private int master;
+    private boolean jestWiad;
+    private String  zapisanaWiad;
     private ArrayList<Integer> slowa;
     private ArrayList<Integer> rigAns;
     private ArrayList<Integer> wrAns;
@@ -28,8 +29,10 @@ public class ReadKlien implements Runnable{
     public ReadKlien(LoginScreenController page1) throws IOException {
         Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
-        tab = new byte[41];
+        tab = new byte[42];
         runda =0;
+        jestWiad = false;
+        zapisanaWiad= "";
         slowa = new ArrayList<Integer>();
         rigAns= new ArrayList<Integer>();
         wrAns = new ArrayList<Integer>();
@@ -44,21 +47,46 @@ public class ReadKlien implements Runnable{
         page = page1;
         master = 0;
     }
+
     public void read() throws IOException {
         while(true){
-            System.out.println("niezepsulem");
+            System.out.println("niezepsulem,");
             int len = is.read(tab);
             if(len == -1){
                 System.out.println("blad wiadomosci");
                 break;
             }
             if(len > 0){
-                String temp = new String(tab);
-                temp = temp.substring(0,len);
-                wiad = temp;
-                System.out.println(wiad);
-                action();
+                if(tab[len-1]==',') { //to już cała wiad
+                    if (!jestWiad) { //nie było nic zapisane
+                        String temp = new String(tab);
+                        temp = temp.substring(0, len);
+                        wiad = temp;
+                        System.out.println(wiad);
+                        action();
+                    } else { //było coś zapisane
+                        if (len == 1 && tab[0] == ',') { //gdyby akurat przyleciał sam przecinek..
+                            jestWiad = false;        //..czyli to co w wiad to jest już wiad
+                            wiad=zapisanaWiad;
+                            action();
+                        } else {
+                            String temp = new String(tab);
+                            temp = temp.substring(0, len - 1); //pozbywamy się też przecinka
+                            wiad = zapisanaWiad + temp;
+                            jestWiad =false;
+                            zapisanaWiad = "";
+                            System.out.println(wiad);
+                            action();
+                        }
+                    }
                 }
+                else { //to tylko część wiadomości
+                    String temp = new String(tab);
+                    temp=temp.substring(0,len);
+                    zapisanaWiad = zapisanaWiad + temp;
+                    jestWiad=true;
+                }
+            }
         }
     }
 
