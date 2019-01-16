@@ -26,5 +26,7 @@ po zakończeniu gry: dostają komunikat, że są (x) [???] w kolejce, i jeśli j
 
 Kwestia adresów/portów serwera/klienta (żeby działało nie na loopbacku)
 
+Przy następnej grze trzeba wyczyścić tablice RIGHT/WRONG ANSWERS ( i pewnie nie tylko je!)
+chyba, że nowy obiekt ReadKlien i WriteKlient.
 
 

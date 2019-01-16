@@ -160,122 +160,122 @@ public class NormalGameScreenController extends MainContoller implements Initial
 
     public void updatePrzyciski(){
         if(Stale.getRk().getZgadniete().get(0) == 1){
-            if(isRight(0)){wyraz1.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(0)){wyraz1.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(0))){wyraz1.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(0))){wyraz1.textFillProperty().setValue(Color.RED);}
             else {wyraz1.textFillProperty().setValue(Color.YELLOW);}
             wyraz1.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(1) == 1){
-            if(isRight(1)){wyraz2.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(1)){wyraz2.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(1))){wyraz2.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(1))){wyraz2.textFillProperty().setValue(Color.RED);}
             else {wyraz2.textFillProperty().setValue(Color.YELLOW);}
             wyraz2.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(2) == 1){
-            if(isRight(2)){wyraz3.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(2)){wyraz3.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(2))){wyraz3.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(2))){wyraz3.textFillProperty().setValue(Color.RED);}
             else {wyraz3.textFillProperty().setValue(Color.YELLOW);}
             wyraz3.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(3) == 1){
-            if(isRight(3)){wyraz4.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(3)){wyraz4.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(3))){wyraz4.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(3))){wyraz4.textFillProperty().setValue(Color.RED);}
             else {wyraz4.textFillProperty().setValue(Color.YELLOW);}
             wyraz4.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(4) == 1){
-            if(isRight(4)){wyraz5.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(4)){wyraz5.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(4))){wyraz5.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(4))){wyraz5.textFillProperty().setValue(Color.RED);}
             else {wyraz5.textFillProperty().setValue(Color.YELLOW);}
             wyraz5.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(5) == 1){
-            if(isRight(5)){wyraz6.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(5)){wyraz6.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(5))){wyraz6.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(5))){wyraz6.textFillProperty().setValue(Color.RED);}
             else {wyraz6.textFillProperty().setValue(Color.YELLOW);}
             wyraz6.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(6) == 1){
-            if(isRight(6)){wyraz7.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(6)){wyraz7.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(6))){wyraz7.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(6))){wyraz7.textFillProperty().setValue(Color.RED);}
             else {wyraz7.textFillProperty().setValue(Color.YELLOW);}
             wyraz7.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(7) == 1){
-            if(isRight(7)){wyraz8.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(7)){wyraz8.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(7))){wyraz8.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(7))){wyraz8.textFillProperty().setValue(Color.RED);}
             else {wyraz8.textFillProperty().setValue(Color.YELLOW);}
             wyraz8.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(8) == 1){
-            if(isRight(8)){wyraz9.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(8)){wyraz9.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(8))){wyraz9.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(8))){wyraz9.textFillProperty().setValue(Color.RED);}
             else {wyraz9.textFillProperty().setValue(Color.YELLOW);}
             wyraz9.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(9) == 1){
-            if(isRight(9)){wyraz10.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(9)){wyraz10.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(9))){wyraz10.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(9))){wyraz10.textFillProperty().setValue(Color.RED);}
             else {wyraz10.textFillProperty().setValue(Color.YELLOW);}
             wyraz10.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(10) == 1){
-            if(isRight(10)){wyraz11.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(10)){wyraz11.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(10))){wyraz11.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(10))){wyraz11.textFillProperty().setValue(Color.RED);}
             else {wyraz11.textFillProperty().setValue(Color.YELLOW);}
             wyraz11.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(11) == 1){
-            if(isRight(11)){wyraz12.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(11)){wyraz12.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(11))){wyraz12.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(11))){wyraz12.textFillProperty().setValue(Color.RED);}
             else {wyraz12.textFillProperty().setValue(Color.YELLOW);}
             wyraz12.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(12) == 1){
-            if(isRight(12)){wyraz13.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(12)){wyraz13.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(12))){wyraz13.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(12))){wyraz13.textFillProperty().setValue(Color.RED);}
             else {wyraz13.textFillProperty().setValue(Color.YELLOW);}
             wyraz13.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(13) == 1){
-            if(isRight(13)){wyraz14.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(13)){wyraz14.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(13))){wyraz14.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(13))){wyraz14.textFillProperty().setValue(Color.RED);}
             else {wyraz14.textFillProperty().setValue(Color.YELLOW);}
             wyraz14.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(14) == 1){
-            if(isRight(14)){wyraz15.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(14)){wyraz15.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(14))){wyraz15.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(14))){wyraz15.textFillProperty().setValue(Color.RED);}
             else {wyraz15.textFillProperty().setValue(Color.YELLOW);}
             wyraz15.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(15) == 1){
-            if(isRight(15)){wyraz16.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(15)){wyraz16.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(15))){wyraz16.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(15))){wyraz16.textFillProperty().setValue(Color.RED);}
             else {wyraz16.textFillProperty().setValue(Color.YELLOW);}
             wyraz16.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(16) == 1){
-            if(isRight(16)){wyraz17.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(16)){wyraz17.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(16))){wyraz17.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(16))){wyraz17.textFillProperty().setValue(Color.RED);}
             else {wyraz17.textFillProperty().setValue(Color.YELLOW);}
             wyraz17.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(17) == 1){
-            if(isRight(17)){wyraz18.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(17)){wyraz18.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(17))){wyraz18.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(17))){wyraz18.textFillProperty().setValue(Color.RED);}
             else {wyraz18.textFillProperty().setValue(Color.YELLOW);}
             wyraz18.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(18) == 1){
-            if(isRight(18)){wyraz19.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(18)){wyraz19.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(18))){wyraz19.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(18))){wyraz19.textFillProperty().setValue(Color.RED);}
             else {wyraz19.textFillProperty().setValue(Color.YELLOW);}
             wyraz1.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(19) == 1){
-            if(isRight(19)){wyraz20.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(19)){wyraz20.textFillProperty().setValue(Color.RED);}
+            if(isRight(Stale.getRk().getSlowa().get(19))){wyraz20.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
+            else if(isWrong(Stale.getRk().getSlowa().get(19))){wyraz20.textFillProperty().setValue(Color.RED);}
             else {wyraz20.textFillProperty().setValue(Color.YELLOW);}
             wyraz20.setDisable(true);
         }

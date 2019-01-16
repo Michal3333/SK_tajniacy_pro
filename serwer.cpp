@@ -52,7 +52,7 @@ string podlicz(){
         int maxindeks=0;
         for(int j = 0; j < 20; j++){
             if(tabodp[j] > maxi){
-                    maxi = tabodp[j];
+                    maxi = tabodp[j]; //remisy wygrywa najbardziej z lewej ;)
                     maxindeks = j;
             }
         }
@@ -144,7 +144,7 @@ void obsluz(char polecenie, int sender) {
         int pom = numbers[0];
         numbers[0] = numbers[19];
         numbers[19] = pom;   //ostatnia była zawsze ta sama, teraz jest losowa
-        //goodAnswers 0-8, bad 9-13, neutral 14-19
+        //goodAnswers 0-9, bad 10-13, neutral 14-19
         setTable(tabtemp, "a");
         tabtemp[41]=',';        // PRZECINEK
         for (int i = 0; i < numberPlayer; i++) {
@@ -179,7 +179,7 @@ void obsluz(char polecenie, int sender) {
             int odpowiedz;
             temp = temp.substr(1, temp.size());
             for (int j = 0; j < temp.size() / 2; j++) {
-                odpowiedz = stoi(temp.substr(0, 2));
+                odpowiedz = stoi(temp.substr(0, 2)); //Trzycyfrowa??? @Michal
                 temp = temp.substr(2, temp.size());
                 tabodp[odpowiedz]++;
             }
@@ -190,8 +190,8 @@ void obsluz(char polecenie, int sender) {
             temp = podlicz();
             zeruj();
             temp = 'd' + temp + ',';  // PRZECINEK
+            char tabtemp[21];
             for (int i = 0; i < numberPlayer; i++) {
-                char tabtemp[21];
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
             }

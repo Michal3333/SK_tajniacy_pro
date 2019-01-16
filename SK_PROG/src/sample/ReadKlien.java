@@ -60,7 +60,7 @@ public class ReadKlien implements Runnable{
                 if(tab[len-1]==',') { //to już cała wiad
                     if (!jestWiad) { //nie było nic zapisane
                         String temp = new String(tab);
-                        temp = temp.substring(0, len);
+                        temp = temp.substring(0, len-1); //pozbywamy się też przecinka
                         wiad = temp;
                         System.out.println(wiad);
                         action();
@@ -122,15 +122,16 @@ public class ReadKlien implements Runnable{
 //            Platform.runLater(()->page.ustawKlucz());
 
             Integer slowo;
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < 10; i++) {
                 slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
                 Stale.getRk().getRigAns().add(slowo);
             }
-            for (int i=9; i<13; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
+            for (int i=10; i<14; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
             {
                 slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
                 Stale.getRk().getWrAns().add(slowo);
             }
+
             Platform.runLater(()->page.wypelnijPrzyciski());
 
         }
