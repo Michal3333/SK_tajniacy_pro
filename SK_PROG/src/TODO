@@ -3,7 +3,8 @@ po wskazaniu złych słów/odgadnięciu wszystkich dobrych gracze wracają do lo
 
 WYCHODZENIE Z GRY
 Kiedy gracz wyjdzie z gry w trakcie:
--zmniejszamy number of players (albo wszędzie, gdzie iterujemy po playerNumber zawsze iterujemy po początkowej ilości, tylko nie wysyłamy nic do wartości == -1
+-zmniejszamy number of players (albo wszędzie, gdzie iterujemy po playerNumber zawsze iterujemy po początkowej ilości,
+ tylko nie wysyłamy nic do wartości == -1
 -jeśli sprawdzamy czy fd==-1, to nie będzie trzeba przesuwać tablic; w przeciwnym wypadku to nieuniknione
 
 jeśli jest masterem: kolejny gracz zostaje masterem i gra przechodzi do następnego etapu (a wynik poprzedniej gry jest liczony jako porażka?)

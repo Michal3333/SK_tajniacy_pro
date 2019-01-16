@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import sample.ReadKlien;
@@ -18,14 +19,17 @@ public class LoginScreenController extends MainContoller{
 
     public static Stage stage;
     public TextField nikcField;
+    public Button button;
 
     public void conect(ActionEvent actionEvent) throws IOException {
-        String nick = nikcField.getText();
+        String nick;
+        if(nikcField.getText().equals("")){ nick="Nowy Gracz";}
+        else{ nick= nikcField.getText();}
         Stale.setRk(new ReadKlien(this));
         Stale.setWk(new WriteKlient(nick));
         Stale.getRk().ropocnij();
         try {
-            LoginScreenController.stage.setScene(utwurzLobby());
+            Stale.getWk().DajOSobieZnac();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,5 +42,12 @@ public class LoginScreenController extends MainContoller{
         return scene;
     }
 
+    public void pozwolSieZalogowac(){
+        try {
+            LoginScreenController.stage.setScene(utwurzLobby());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

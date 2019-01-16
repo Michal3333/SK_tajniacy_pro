@@ -16,6 +16,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <queue>
 using namespace std;
 int playersFd[10];
 string playersNicks[10];
@@ -27,13 +28,18 @@ int status = 0;
 int tabodp[20];
 int iloscpodpowiedzi;
 int player;
+queue <int> upcomingPlayers;
 
-int ktoryGracz(int fd){ //returns logical index of player with diven descriptor
+int ktoryGracz(int fd){ //returns logical index of player with given descriptor
     for(int i =0; i < numberPlayer; i++)
     {
         if(fd==playersFd[i]) return i;
     }
     printf("zla ta funkcja chyba w takim razie");
+}
+
+bool jestGracz(int fd){
+    return (fd > 0);
 }
 
 void ustawMainPlayera(int nr){
@@ -81,10 +87,13 @@ void setTable(char *tab, string option){
 }
 
 void obsluz(char polecenie, int sender) {
-    if (polecenie == 'l') {
+    if(polecenie=='a'){
+        write(sender, "b,", 2);
+    }
+    else if (polecenie == 'l') {
         int current;
-        for (int i = 0; i < numberPlayer; i++) {
-            if (playersFd[i] != sender) {
+        for (int i = 0; i < 5; i++) {
+            if (playersFd[i] != sender && jestGracz(playersFd[i])) {
                 char tabtemp[20];
                 write(1, "w1", 2);
                 temp=temp+','; // PRZECINEK
@@ -136,7 +145,7 @@ void obsluz(char polecenie, int sender) {
             cout << tabtemp[i] << tabtemp[i + 1] << " " << endl;
         }
         //send the numbers
-        for (int i = 0; i < numberPlayer; i++) {
+        for (int i = 0; i < 5; i++) {
             write(playersFd[i], tabtemp, 42);
         }
 
@@ -155,13 +164,15 @@ void obsluz(char polecenie, int sender) {
         status = 1;
 
         iloscpodpowiedzi = atoi(temp.substr(1,1).c_str());
-        for (int i = 0; i < numberPlayer; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i != currentPlayer) {
                 char tabtemp[20];
                 strcpy(tabtemp, temp.c_str());
+                if(jestGracz(playersFd[i]))
                 write(playersFd[i], tabtemp, temp.size());
             }
         }
+        if(jestGracz(playersFd[currentPlayer]))
         write(playersFd[currentPlayer], "t,", 2);  // PRZECINEK
 
     } else if (polecenie == 'o') {
@@ -179,7 +190,7 @@ void obsluz(char polecenie, int sender) {
             int odpowiedz;
             temp = temp.substr(1, temp.size());
             for (int j = 0; j < temp.size() / 2; j++) {
-                odpowiedz = stoi(temp.substr(0, 2)); //Trzycyfrowa??? @Michal
+                odpowiedz = stoi(temp.substr(0, 2));
                 temp = temp.substr(2, temp.size());
                 tabodp[odpowiedz]++;
             }
@@ -191,8 +202,9 @@ void obsluz(char polecenie, int sender) {
             zeruj();
             temp = 'd' + temp + ',';  // PRZECINEK
             char tabtemp[21];
-            for (int i = 0; i < numberPlayer; i++) {
+            for (int i = 0; i < 5; i++) {
                 strcpy(tabtemp, temp.c_str());
+                if(jestGracz(playersFd[i]))
                 write(playersFd[i], tabtemp, temp.size());
             }
         }
@@ -201,13 +213,27 @@ void obsluz(char polecenie, int sender) {
             temp = podlicz();
             zeruj();
             temp = 'w' + temp + ','; // PRZECINEK
-            for (int i = 0; i < numberPlayer; i++) {
+            for (int i = 0; i < 5; i++) {
                 char tabtemp[20];
                 strcpy(tabtemp, temp.c_str());
+                if(jestGracz(playersFd[i]))
                 write(playersFd[i], tabtemp, temp.size());
             }
         }
     }
+        else if(polecenie=='q'){ //when a player quit the game, trzeba posprzątać!
+        playersFd[ktoryGracz(sender)]=-1;
+        playersNicks[ktoryGracz(sender)]=""; // na razie wymazujemy tylko nick
+        numberPlayer--;
+        }
+        else if(polecenie=='g'){//ktoś wyszedł w lobby!
+            if(upcomingPlayers.size()>0)
+                numberPlayer--;
+        write(upcomingPlayers.back(),"y", 1); //piszemy że może wbijać
+            upcomingPlayers.pop();
+
+        }
+        else if(polecenie == 'r'){}
 }
 
 int main() {
@@ -241,21 +267,27 @@ int main() {
             if(events[i].data.fd == serwersock){
                 write(1,"1\n",2);
                 userfd = accept(serwersock, (struct sockaddr*) &sck_user, &ntmp );
-                ee.events = EPOLLIN ;
+                ee.events = EPOLLIN;
                 ee.data.fd = userfd;
                 epoll_ctl(epollfd, EPOLL_CTL_ADD, userfd, &ee);
+                if(numberPlayer==5)//są już wszyscy gracze
+                {
+                upcomingPlayers.push(userfd);
+                }
+                else
                 playersFd[numberPlayer]= userfd;
-                numberPlayer++;
+                if(numberPlayer<5) numberPlayer++; // max 5 graczy, nowi nie zwiększają
 
                 if(numberPlayer == 1){
                     write(1,"---",3);
                     ustawMainPlayera(0);
                 }
-
             }
             else{
                 write(1,"r",1);
                 odp = read(events[i].data.fd,buffer, 40);
+                if(numberPlayer > 5) buffer[0]='r'; //jak już są wszyscy, nie masz się logować!
+
                 temp = buffer;
                 temp = temp.substr(0,odp);
 
@@ -289,9 +321,9 @@ int main() {
                 savedMsgLength[player]+=odp; //tyle teraz mamy
                 /* mam wrażenie że tu coś jeszcze powinno być, ale na ten moment nie wpadło mi do głowy */
                 }
+
             }
         }
     }
-
     return 0;
 }

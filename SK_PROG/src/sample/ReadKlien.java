@@ -95,11 +95,17 @@ public class ReadKlien implements Runnable{
         String firstletter;
         firstletter = wiad.substring(0,1);
         wiad = wiad.substring(1);
+        if(firstletter.equals("b")){
+            Platform.runLater(()->page.pozwolSieZalogowac());
+        }
         if(firstletter.equals("l")){
             Platform.runLater(() -> page.uzupenijGracza(0));
         }
         if(firstletter.equals("s")){
             Platform.runLater(() -> page.uzupenijGracza(1));
+        }
+        if(firstletter.equals("y")) {
+            Platform.runLater(()->page.czekajNaMiejsce());
         }
         if(firstletter.equals("m")){
             master = 1;
@@ -161,6 +167,7 @@ public class ReadKlien implements Runnable{
             }
             Platform.runLater(()->page.updatePrzyciski());
         }
+        if(firstletter.equals("y")){}
 //        Platform.runLater(() -> page.czytaj());
 
     }

@@ -16,6 +16,11 @@ public class WriteKlient {
     public void write() throws IOException {
         os.write(wiadomosc);
     }
+    public void DajOSobieZnac() throws IOException {
+        wiadomosc = ("a,").getBytes();
+        os.write(wiadomosc);
+    }
+
     public void logIn() throws IOException {
         wiadomosc = ("l" + nick+",").getBytes();
         os.write(wiadomosc);

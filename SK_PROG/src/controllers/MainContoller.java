@@ -11,4 +11,6 @@ public abstract class MainContoller {
     public void startTimer(){}
     public void odbierzPodpowiedz(){}
     public void odbierzDrugaTure(){}
+    public void pozwolSieZalogowac() {}
+    public void czekajNaMiejsce() {}
 }
