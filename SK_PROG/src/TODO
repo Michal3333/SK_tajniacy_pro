@@ -1,0 +1,30 @@
+Zapętlanie się gry: po drugim głosowaniu następuje wskazanie wyników rundy, rozpoczyna się kolejna
+po wskazaniu złych słów/odgadnięciu wszystkich dobrych gracze wracają do lobby, gdzie pokazane są wyniki
+
+WYCHODZENIE Z GRY
+Kiedy gracz wyjdzie z gry w trakcie:
+-zmniejszamy number of players (albo wszędzie, gdzie iterujemy po playerNumber zawsze iterujemy po początkowej ilości, tylko nie wysyłamy nic do wartości == -1
+-jeśli sprawdzamy czy fd==-1, to nie będzie trzeba przesuwać tablic; w przeciwnym wypadku to nieuniknione
+
+jeśli jest masterem: kolejny gracz zostaje masterem i gra przechodzi do następnego etapu (a wynik poprzedniej gry jest liczony jako porażka?)
+
+jeśli jest graczem: gra toczy się dalej?
+
+Zakończenie rozgrywki:  po zakończeniu każdej rundy serwer sprawdza, czy wszystkie złe słowa nie zostały zgadnięte. jeśli tak, gra została
+uznana za przegraną. Jeśli nie - sprawdza ile jeszcze tur zostało do zakończenia gry; jeśli zero- przegrana. Sprawdza też, czy wszystkie dobre słowa zostały zgadnięte
+jeśli tak - gra została uznana za wygraną.
+
+[???] Jak gracze dowiadują się, że runda została wygrana/przegrana? chyba nie możemy na hama ładować kolejnego ekranu, przydała by się np.
+jakieś okienko "koniec rundy!" które blokuje poprzedni ekran, i kiedy okienko się zamknie -> ładuje ekran kolejnej rundy
+
+
+Gracze którzy chcą dołączyć:
+
+w trakcie: dostają komunikat od serwera że gra jest w trakcie, i mogą czekać na zakończenie gry, gdzie może zostaną dodani PRZEZ SERWER do lobby
+po zakończeniu gry: dostają komunikat, że są (x) [???] w kolejce, i jeśli jakiś gracz wyjdzie to zostaną automatycznie połączeni.
+
+
+Kwestia adresów/portów serwera/klienta (żeby działało nie na loopbacku)
+
+
+
