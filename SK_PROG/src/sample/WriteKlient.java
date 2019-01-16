@@ -17,32 +17,35 @@ public class WriteKlient {
         os.write(wiadomosc);
     }
     public void logIn() throws IOException {
-        wiadomosc = ("l" + nick).getBytes();
+        wiadomosc = ("l" + nick+",").getBytes();
+        os.write(wiadomosc);
+    }
+    public void gotowosc() throws IOException { //wysyłamy serwerowi wiadomość o naszej gotowości
+        wiadomosc = ("j"+",").getBytes();
         os.write(wiadomosc);
     }
 
-
     public void rozpocznijGre() throws IOException {
-        wiadomosc = "r".getBytes();
+        wiadomosc = ("r"+",").getBytes();
         os.write(wiadomosc);
     }
 
     public void wyslijPodpowiedz(String podpowiedz, int ilosc) throws IOException {
-        wiadomosc = ("h" + Integer.toString(ilosc) + podpowiedz).getBytes();
+        wiadomosc = ("h" + Integer.toString(ilosc) + podpowiedz+",").getBytes();
         os.write(wiadomosc);
     }
 
     public void koniecCzasu() throws IOException {
-        wiadomosc = "e".getBytes();
+        wiadomosc = ("e"+",").getBytes();
         os.write(wiadomosc);
     }
 
     public void wyslijOdpowiedz(String odp) throws IOException {
         if(Stale.getRk().getRunda()==0){
-            wiadomosc = ("o" + odp).getBytes();
+            wiadomosc = ("o" + odp + ",").getBytes();
         }
         else if(Stale.getRk().getRunda()==1)
-        wiadomosc = ("p" + odp).getBytes();
+        wiadomosc = ("p" + odp + ",").getBytes();
         os.write(wiadomosc);
 
     }
