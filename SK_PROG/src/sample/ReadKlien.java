@@ -3,6 +3,7 @@ package sample;
 import controllers.LoginScreenController;
 import controllers.MainContoller;
 import javafx.application.Platform;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,7 +67,7 @@ public class ReadKlien implements Runnable{
         wymaganailoscrund = 6;
         stop = false;
         iloscGier = 0;
-        //wymaganaIloscGier =2; //TODO ustawaic od graczy
+        wymaganaIloscGier =2;
 
     }
 
@@ -115,8 +116,12 @@ public class ReadKlien implements Runnable{
         wiad = wiad.substring(1);
         System.out.println(firstletter);
         System.out.println(wiad);
-        if(firstletter.equals("i")){
-            wymaganaIloscGier=Integer.parseInt(wiad);
+        if(firstletter.equals("i")){ //wiadomość z poziomem i ilością gier
+            wymaganaIloscGier= Integer.parseInt(wiad.substring(0,2));
+            if(Integer.parseInt(wiad.substring(2))==0)wymaganailoscrund=7;   //łatwy
+            else if(Integer.parseInt(wiad.substring(2))==1)wymaganailoscrund=5; //Zawansowany
+            else if(Integer.parseInt(wiad.substring(2))==2)wymaganailoscrund=4; //Ekspert
+
         }
         if(firstletter.equals("b")){
             Platform.runLater(() -> page.odblokuj());
@@ -166,7 +171,6 @@ public class ReadKlien implements Runnable{
                 wymaganeDobre = 10;
                 wymaganeZle = 4;
                 iloscRund = 0;
-                wymaganailoscrund = 6;
                 Integer slowo;
                 for(int i=0; i<20; i++){
                     slowo = Integer.parseInt(wiad.substring(2*i,2*i+2));
@@ -237,10 +241,10 @@ public class ReadKlien implements Runnable{
                     master=0;
                 }
             }
-            else if(iloscRund ==6){
+            else if(iloscRund ==wymaganailoscrund){
                 //przegranko
                 if(master==1){
-                    Platform.runLater(()-> page.showAlertAboutGameStatus("Niestety nie zdążyliście odgadnąć wszystkich poprawnych odpowiedzi"));
+                    Platform.runLater(()-> page.showAlertAboutGameStatus("Niestety - nie zdążyliście odgadnąć wszystkich poprawnych odpowiedzi"));
                     Stale.getWk().zakonczpartiePrzgranie();
                     master=0;
                 }

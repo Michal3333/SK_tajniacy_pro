@@ -25,9 +25,9 @@ public class WriteKlient {
         os.write(wiadomosc);
     }
 
-    public void rozpocznijGre() throws IOException {
+    public void rozpocznijGre(Integer poziom) throws IOException {
 
-        wiadomosc = "r,".getBytes();
+        wiadomosc = ("r" + poziom + ",").getBytes();
 
         os.write(wiadomosc);
     }

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
@@ -26,26 +27,22 @@ public class LobbyController extends MainContoller implements Initializable {
     public Label gracz5;
     public int labels;
     public Button rozpocznijButton;
-    ObservableList<String> options =
-            FXCollections.observableArrayList(
-                    "Option 1",
-                    "Option 2",
-                    "Option 3"
-            );
-    final ComboBox comboBox = new ComboBox(options);
-
+    public ChoiceBox box = new ChoiceBox(FXCollections.observableArrayList(
+             "Łatwy", "Zaawansowany", "Ekspert")
+        );
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Stale.getRk().setPage(this);
         gracz1.setText(Stale.getWk().getNick());
         labels = 2;
+        box.getSelectionModel().select(0); //domyślnie łatwy
         try {
             Stale.getWk().logIn();
         } catch (IOException e) {
             e.printStackTrace();
         }
         if(Stale.getRk().getMaster() != 1){
-            comboBox.setVisible(false);
+            box.setVisible(false);
             rozpocznijButton.setDisable(true);
         }
 
@@ -88,7 +85,7 @@ public class LobbyController extends MainContoller implements Initializable {
     }
 
     public void rozpocznij(ActionEvent actionEvent) throws IOException {
-        Stale.getWk().rozpocznijGre();
+        Stale.getWk().rozpocznijGre(box.getSelectionModel().getSelectedIndex());
     }
 
     @Override
