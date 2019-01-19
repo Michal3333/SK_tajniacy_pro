@@ -1,7 +1,10 @@
 package controllers;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -56,25 +59,20 @@ public class NormalGameScreenController extends MainContoller implements Initial
             zaznaczone.add(0);
         }
         zeruj();
+        wysOdp.setDisable(true);
 
 //        Label label = tabela.getChildren().get(1).;
     }
 
 
     public String slowoAsText(Integer index){
-        return Words.words.get(index);
+        return Words.words.get(index - 1);
     }
     public boolean isRight(Integer index){
-        for(Integer i : Stale.getRk().getRigAns()) {
-            if(index == i) return true;
-        }
-        return false;
+        return Stale.getRk().getRigAns().contains(Stale.getRk().getSlowa().get(index));
     }
     public boolean isWrong(Integer index){
-        for(Integer i : Stale.getRk().getWrAns()) {
-            if(index == i) return true;
-        }
-        return false;
+        return Stale.getRk().getWrAns().contains(Stale.getRk().getSlowa().get(index));
     }
     public void zeruj(){
         wysOdp.setDisable(false);
@@ -85,6 +83,11 @@ public class NormalGameScreenController extends MainContoller implements Initial
                tabela.getChildren().get(i).setDisable(false);
            }
        }
+    }
+    public void zerujZaznaczone(){
+        for(int i=0;i<20;i++){
+            zaznaczone.set(i,0);
+        }
     }
 
     public void startTimer(){
@@ -103,12 +106,15 @@ public class NormalGameScreenController extends MainContoller implements Initial
         ilosc.setText(Stale.getRk().getWiad().substring(0,1));
         podpowiedz.setText(Stale.getRk().getWiad().substring(1));
         zeruj();
+        zerujZaznaczone();
         wysOdp.setDisable(false);
         startTimer();
+
     }
 
     public void odbierzDrugaTure(){
         zeruj();
+        updatePrzyciski();
         if(Stale.getRk().getDrugaRunda().get(0) == 0){ wyraz1.setDisable(true); }
         if(Stale.getRk().getDrugaRunda().get(1) == 0){ wyraz2.setDisable(true); }
         if(Stale.getRk().getDrugaRunda().get(2) == 0){ wyraz3.setDisable(true); }
@@ -129,6 +135,8 @@ public class NormalGameScreenController extends MainContoller implements Initial
         if(Stale.getRk().getDrugaRunda().get(17) == 0){ wyraz18.setDisable(true); }
         if(Stale.getRk().getDrugaRunda().get(18) == 0){ wyraz19.setDisable(true); }
         if(Stale.getRk().getDrugaRunda().get(19) == 0){ wyraz20.setDisable(true); }
+
+        zerujZaznaczone();
         startTimer();
 
     }
@@ -507,6 +515,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
         String odp = "";
         for(int i = 0; i < 20; i++){
             if(zaznaczone.get(i) == 1){
+                tabela.getChildren().get(i).setStyle("-fx-text-fill: black");
                 if(i < 10){
                     odp = odp + "0" + Integer.toString(i);
                 }
@@ -516,6 +525,50 @@ public class NormalGameScreenController extends MainContoller implements Initial
             }
         }
         Stale.getWk().wyslijOdpowiedz(odp);
+        wysOdp.setDisable(true);
+    }
+    @Override
+    public void przejdzDalej(){
+        if(Stale.getRk().getMaster() == 0) {
+            try {
+                LoginScreenController.stage.setScene(utwurzGre());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(Stale.getRk().getMaster() == 1){
+            try {
+                LoginScreenController.stage.setScene(utwurzGreMain());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private Scene utwurzGre() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+
+    private Scene utwurzGreMain() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LeaderScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+    private Scene utwurzLoginScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LoginScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+    public void goLogin(){
+        try {
+            LoginScreenController.stage.setScene(utwurzLoginScreen());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -26,11 +26,13 @@ int numbers[20];
 int status = 0;
 int tabodp[20];
 int iloscpodpowiedzi;
+int przegraneRundy=0;
+int wtgraneRundy=0;
 
 
 void ustawMainPlayera(int nr){
     currentPlayer = nr;
-    write(playersFd[nr],"m",1);
+    write(playersFd[nr],"m,",2);
 }
 void zeruj(){
     for(int i = 0; i < 20; i++){
@@ -77,8 +79,9 @@ void obsluz(char polecenie, int sender) {
         int current;
         for (int i = 0; i < numberPlayer; i++) {
             if (playersFd[i] != sender) {
-                char tabtemp[20];
+                char tabtemp[21];
                 write(1, "w1", 2);
+                temp = temp + ",";
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
                 write(1, tabtemp, temp.size());
@@ -89,16 +92,17 @@ void obsluz(char polecenie, int sender) {
             }
         }
         for (int i = 0; i < current; i++) {
-            char tabtemp[20];
+            char tabtemp[21];
             write(1, "w2", 2);
-            strcpy(tabtemp, playersNicks[i].c_str());
+            string nickname = playersNicks[i] + ",";
+            strcpy(tabtemp, nickname.c_str());
 
             if (i == currentPlayer) {
                 tabtemp[0] = 's';
             }
 
-            write(sender, tabtemp, playersNicks[i].size());
-            write(1, tabtemp, playersNicks[i].size());
+            write(sender, tabtemp, nickname.size());
+            write(1, tabtemp, nickname.size());
             write(1, "\n", 1);
         }
     } else if (polecenie == 'r') { //rozpoczęcie gry
@@ -118,15 +122,15 @@ void obsluz(char polecenie, int sender) {
             } else i--;
         }
 
-        char tabtemp[41];
+        char tabtemp[42];
         setTable(tabtemp, "k");
-
+        tabtemp[41] = ',';
         for (int i = 1; i < 41; i += 2) {
             cout << tabtemp[i] << tabtemp[i + 1] << " " << endl;
         }
         //send the numbers
         for (int i = 0; i < numberPlayer; i++) {
-            write(playersFd[i], tabtemp, 41);
+            write(playersFd[i], tabtemp, 42);
         }
 
         random_shuffle(&numbers[0], &numbers[19]); //przemieszanie tablicy
@@ -135,8 +139,9 @@ void obsluz(char polecenie, int sender) {
         numbers[19] = pom;   //ostatnia była zawsze ta sama, teraz jest losowa
         //goodAnswers 0-8, bad 9-13, neutral 14-19
         setTable(tabtemp, "a");
+        tabtemp[41] = ',';
         for (int i = 0; i < numberPlayer; i++) {
-            write(playersFd[i], tabtemp, 41);   //wysyłanie klucza
+            write(playersFd[i], tabtemp, 42);   //wysyłanie klucza
         }
     } else if (polecenie == 'h') {
         status = 1;
@@ -144,29 +149,32 @@ void obsluz(char polecenie, int sender) {
         iloscpodpowiedzi = atoi(temp.substr(1,1).c_str());
         for (int i = 0; i < numberPlayer; i++) {
             if (i != currentPlayer) {
-                char tabtemp[20];
+                char tabtemp[21];
+                temp = temp + ",";
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
             }
         }
-        write(playersFd[currentPlayer], "t", 1);
+        write(playersFd[currentPlayer], "t,", 2);
     } else if (polecenie == 'o') {
         if (status == 1) {
             int odpowiedz;
-            temp = temp.substr(1, temp.size());
-            for (int j = 0; j < temp.size()+1 / 2; j++) {
+            temp = temp.substr(1);
+            int size = temp.size()/2;
+            for (int j = 0; j < size; j++) {
                 odpowiedz = stoi(temp.substr(0, 2));
-                temp = temp.substr(2, temp.size());
+                temp = temp.substr(2);
                 tabodp[odpowiedz]++;
             }
         }
     } else if (polecenie == 'p') {
         if (status == 2) {
             int odpowiedz;
-            temp = temp.substr(1, temp.size());
-            for (int j = 0; j < temp.size() / 2; j++) {
+            temp = temp.substr(1);
+            int size = temp.size()/2;
+            for (int j = 0; j < size; j++) {
                 odpowiedz = stoi(temp.substr(0, 2));
-                temp = temp.substr(2, temp.size());
+                temp = temp.substr(2);
                 tabodp[odpowiedz]++;
             }
         }
@@ -175,9 +183,9 @@ void obsluz(char polecenie, int sender) {
             status = 2;
             temp = podlicz();
             zeruj();
-            temp = 'd' + temp;
+            temp = 'd' + temp +",";
             for (int i = 0; i < numberPlayer; i++) {
-                char tabtemp[20];
+                char tabtemp[21];
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
             }
@@ -186,9 +194,9 @@ void obsluz(char polecenie, int sender) {
             status = 0;
             temp = podlicz();
             zeruj();
-            temp = 'w' + temp;
+            temp = 'w' + temp + ",";
             for (int i = 0; i < numberPlayer; i++) {
-                char tabtemp[20];
+                char tabtemp[21];
                 strcpy(tabtemp, temp.c_str());
                 write(playersFd[i], tabtemp, temp.size());
 
@@ -197,6 +205,53 @@ void obsluz(char polecenie, int sender) {
 
 
         }
+    }
+    else if(polecenie == 'f' || polecenie =='i'){
+        if(polecenie == 'f')wtgraneRundy++;
+        else przegraneRundy++;
+        int main = currentPlayer + 1 ;
+        while(playersFd[main] == -1){
+            main++;
+            if(main > 4){
+                main = 0;
+            }
+        }
+        ustawMainPlayera(main);
+        int n;
+        bool unique;
+        for (int i = 0; i < 20; i++) {
+            n = rand() % 24 + 1;
+            unique = true;
+            for (int j = 0; j < i; j++) {
+                if (numbers[j] == n) unique = false;     //generowanie unikalnych numerów
+            }
+            if (unique) {
+                numbers[i] = n;
+            } else i--;
+        }
+
+        char tabtemp[42];
+        setTable(tabtemp, "k");
+        tabtemp[41] = ',';
+        for (int i = 1; i < 41; i += 2) {
+            cout << tabtemp[i] << tabtemp[i + 1] << " " << endl;
+        }
+        //send the numbers
+        for (int i = 0; i < numberPlayer; i++) {
+            write(playersFd[i], tabtemp, 42);
+        }
+
+        random_shuffle(&numbers[0], &numbers[19]); //przemieszanie tablicy
+        int pom = numbers[0];
+        numbers[0] = numbers[19];
+        numbers[19] = pom;   //ostatnia była zawsze ta sama, teraz jest losowa
+        //goodAnswers 0-8, bad 9-13, neutral 14-19
+        setTable(tabtemp, "a");
+        tabtemp[41] = ',';
+        for (int i = 0; i < numberPlayer; i++) {
+            write(playersFd[i], tabtemp, 42);   //wysyłanie klucza
+        }
+
     }
 }
 
@@ -221,6 +276,12 @@ int main() {
     epoll_ctl(epollfd,EPOLL_CTL_ADD, serwersock,&ee);
     int q = 0;
     write(1,"z\n",2);
+    String savedMsgBuffer[5];
+    int savedMsgLength[5];
+    for(int i=0;i<5;i++) {
+        savedMsgLength[i]=0;
+        savedMsgBuffer[i]="";
+    }
     while(q == 0){
         write(1,"l",1);
         ewait = epoll_wait(epollfd, events, 10, -1);
@@ -245,10 +306,30 @@ int main() {
                 odp = read(events[i].data.fd,buffer, 40);
                 temp = buffer;
                 temp = temp.substr(0,odp);
+                string calaWiadomosc = temp;
+                int graczDoObslugi;
 //                write(events[i].data.fd, buffer,odp);
-                obsluz(buffer[0], events[i].data.fd);
-                write(1,buffer,odp);
-                write(1,"\n",1);
+                for(int j = 0; j < 5; j++){
+                    if(playersFd[j] == events[i].data.fd) graczDoObslugi = j;
+                }
+                while(calaWiadomosc.find(",") != string::npos){
+                    string nowaWiadosc = "";
+                    if(savedMsgLength[graczDoObslugi] > 0){
+                        nowaWiadosc = savedMsgBuffer[graczDoObslugi];
+                        savedMsgBuffer[graczDoObslugi]="";
+                        savedMsgLength[graczDoObslugi]=0;
+                    }
+                    temp = nowaWiadosc + calaWiadomosc.substr(0,calaWiadomosc.find(',',0));
+                    calaWiadomosc = calaWiadomosc.substr(calaWiadomosc.find(',',0) + 1);
+                    obsluz(temp[0], events[i].data.fd);
+                    write(1,buffer,odp);
+                    write(1,"\n",1);
+                }
+                if(calaWiadomosc.length()>0){
+                    savedMsgBuffer[graczDoObslugi] = calaWiadomosc;
+                    savedMsgLength[graczDoObslugi] = calaWiadomosc.length();
+                }
+
             }
         }
     }

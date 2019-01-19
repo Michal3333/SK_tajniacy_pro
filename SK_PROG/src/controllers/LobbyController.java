@@ -110,5 +110,18 @@ public class LobbyController extends MainContoller implements Initializable {
         Scene scene = new Scene(root);
         return scene;
     }
+    private Scene utwurzLoginScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LoginScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+    public void goLogin(){
+        try {
+            LoginScreenController.stage.setScene(utwurzLoginScreen());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

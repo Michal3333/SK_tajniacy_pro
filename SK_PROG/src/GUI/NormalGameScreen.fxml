@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.NormalGameScreenController">
    <children>
       <GridPane fx:id="tabela" layoutX="101.0" layoutY="120.0" prefHeight="406.0" prefWidth="599.0">
@@ -25,29 +24,30 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="wyraz1" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" />
-            <Button fx:id="wyraz2" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" />
-            <Button fx:id="wyraz3" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" />
-            <Button fx:id="wyraz4" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" />
-            <Button fx:id="wyraz5" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" />
-            <Button fx:id="wyraz6" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="1" />
-            <Button fx:id="wyraz7" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button fx:id="wyraz8" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="wyraz9" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button fx:id="wyraz10" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Button fx:id="wyraz11" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="2" />
-            <Button fx:id="wyraz12" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button fx:id="wyraz13" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button fx:id="wyraz14" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="wyraz15" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button fx:id="wyraz16" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="3" />
-            <Button fx:id="wyraz17" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="wyraz18" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="wyraz19" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Button fx:id="wyraz20" mnemonicParsing="false" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Button fx:id="wyraz1" mnemonicParsing="false" onAction="#wyr1" prefHeight="135.0" prefWidth="120.0" text="Button" />
+            <Button fx:id="wyraz2" mnemonicParsing="false" onAction="#wyr2" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" />
+            <Button fx:id="wyraz3" mnemonicParsing="false" onAction="#wyr3" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" />
+            <Button fx:id="wyraz4" mnemonicParsing="false" onAction="#wyr4" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" />
+            <Button fx:id="wyraz5" mnemonicParsing="false" onAction="#wyr5" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" />
+            <Button fx:id="wyraz6" mnemonicParsing="false" onAction="#wyr6" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="1" />
+            <Button fx:id="wyraz7" mnemonicParsing="false" onAction="#wyr7" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="wyraz8" mnemonicParsing="false" onAction="#wyr8" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="wyraz9" mnemonicParsing="false" onAction="#wyr9" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="wyraz10" mnemonicParsing="false" onAction="#wyr10" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button fx:id="wyraz11" mnemonicParsing="false" onAction="#wyr11" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="2" />
+            <Button fx:id="wyraz12" mnemonicParsing="false" onAction="#wyr12" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="wyraz13" mnemonicParsing="false" onAction="#wyr13" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="wyraz14" mnemonicParsing="false" onAction="#wyr14" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="wyraz15" mnemonicParsing="false" onAction="#wyr15" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Button fx:id="wyraz16" mnemonicParsing="false" onAction="#wyr16" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.rowIndex="3" />
+            <Button fx:id="wyraz17" mnemonicParsing="false" onAction="#wyr17" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="wyraz18" mnemonicParsing="false" onAction="#wyr18" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="wyraz19" mnemonicParsing="false" onAction="#wyr19" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="wyraz20" mnemonicParsing="false" onAction="#wyr20" prefHeight="135.0" prefWidth="120.0" text="Button" GridPane.columnIndex="4" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Label layoutX="182.0" layoutY="74.0" text="Podpowiedz" />
-      <Label layoutX="518.0" layoutY="74.0" text="ilosc" />
+      <Label fx:id="podpowiedz" layoutX="182.0" layoutY="74.0" text="Podpowiedz" />
+      <Label fx:id="ilosc" layoutX="518.0" layoutY="74.0" text="ilosc" />
+      <Button fx:id="wysOdp" layoutX="374.0" layoutY="550.0" mnemonicParsing="false" onAction="#wyslijOdp" text="Wyslij Odpowiedz" />
    </children>
 </AnchorPane>
