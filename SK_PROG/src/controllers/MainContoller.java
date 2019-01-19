@@ -11,6 +11,10 @@ public abstract class MainContoller {
     public void startTimer(){}
     public void odbierzPodpowiedz(){}
     public void odbierzDrugaTure(){}
-    public void pozwolSieZalogowac() {}
-    public void czekajNaMiejsce() {}
+    public void goLogin(){}
+    public void zostanPrzyjety(){}
+    public void nieZostanPrzyjety(){}
+    public void odblokuj(){}
+    public void showAlertAboutGameStatus(String info) {}
+
 }

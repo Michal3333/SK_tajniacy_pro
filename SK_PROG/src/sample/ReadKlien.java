@@ -24,6 +24,18 @@ public class ReadKlien implements Runnable{
     private ArrayList<Integer> zgadniete;
     private ArrayList<Integer> drugaRunda;
     private int runda;
+    private String zapisanaWiadomosc;
+    private Boolean jestWiad;
+    private int wynikDobre;
+    private int wynikZle;
+    private int wymaganeDobre;
+    private int wymaganeZle;
+    private int iloscRund;
+    private int  wymaganailoscrund;
+    private boolean stop;
+    private int iloscGier;
+    private int wymaganaIloscGier;
+
 
 
     public ReadKlien(LoginScreenController page1) throws IOException {
@@ -42,61 +54,76 @@ public class ReadKlien implements Runnable{
             zgadniete.add(0);
             drugaRunda.add(0);
         }
-
+        zapisanaWiadomosc = "";
+        jestWiad = false;
         wiad = "";
         page = page1;
         master = 0;
+        wynikDobre = 0;
+        wynikZle = 0;
+        wymaganeDobre = 10;
+        wymaganeZle = 4;
+        iloscRund = 0;
+        wymaganailoscrund = 6;
+        stop = false;
+        iloscGier = 0;
+        wymaganaIloscGier =2; //TODO ustawaic od graczy
+
     }
 
     public void read() throws IOException {
         while(true){
-            System.out.println("niezepsulem,");
+            if(stop)break;
             int len = is.read(tab);
             if(len == -1){
                 System.out.println("blad wiadomosci");
                 break;
             }
             if(len > 0){
-                if(tab[len-1]==',') { //to już cała wiad
-                    if (!jestWiad) { //nie było nic zapisane
-                        String temp = new String(tab);
-                        temp = temp.substring(0, len-1); //pozbywamy się też przecinka
-                        wiad = temp;
-                        System.out.println(wiad);
-                        action();
-                    } else { //było coś zapisane
-                        if (len == 1 && tab[0] == ',') { //gdyby akurat przyleciał sam przecinek..
-                            jestWiad = false;        //..czyli to co w wiad to jest już wiad
-                            wiad=zapisanaWiad;
-                            action();
-                        } else {
-                            String temp = new String(tab);
-                            temp = temp.substring(0, len - 1); //pozbywamy się też przecinka
-                            wiad = zapisanaWiad + temp;
-                            jestWiad =false;
-                            zapisanaWiad = "";
-                            System.out.println(wiad);
-                            action();
-                        }
+                String temp = new String(tab);
+
+                temp = temp.substring(0,len);
+                System.out.println("cala wiadmosc- "+temp);
+                while(temp.contains(",")){
+                    System.out.println("xd");
+                    String newWiad="";
+                    if(jestWiad){
+                        newWiad = zapisanaWiadomosc;
+                        jestWiad = false;
+                        zapisanaWiadomosc = "";}
+                    wiad = newWiad + temp.substring(0,temp.indexOf(","));
+                    if(temp.indexOf(",") == temp.length() - 1){
+                        temp = "";
                     }
+                    else temp = temp.substring(temp.indexOf(",")+1);
+                    System.out.println("wiad- "+wiad);
+                    action();
                 }
-                else { //to tylko część wiadomości
-                    String temp = new String(tab);
-                    temp=temp.substring(0,len);
-                    zapisanaWiad = zapisanaWiad + temp;
-                    jestWiad=true;
+                if(temp.length()>0){
+                    zapisanaWiadomosc = temp;
+                    jestWiad = true;
+                }
                 }
             }
         }
     }
 
 
-    public void action(){
+    public void action() throws IOException {
         String firstletter;
+        System.out.println("action");
         firstletter = wiad.substring(0,1);
         wiad = wiad.substring(1);
+        System.out.println(firstletter);
+        System.out.println(wiad);
         if(firstletter.equals("b")){
-            Platform.runLater(()->page.pozwolSieZalogowac());
+            Platform.runLater(() -> page.odblokuj());
+        }
+        if(firstletter.equals("c")){
+            Platform.runLater(() -> page.nieZostanPrzyjety());
+        }
+        if(firstletter.equals("z")){
+            Platform.runLater(() -> page.zostanPrzyjety());
         }
         if(firstletter.equals("l")){
             Platform.runLater(() -> page.uzupenijGracza(0));
@@ -104,27 +131,49 @@ public class ReadKlien implements Runnable{
         if(firstletter.equals("s")){
             Platform.runLater(() -> page.uzupenijGracza(1));
         }
-        if(firstletter.equals("y")) {
-            Platform.runLater(()->page.czekajNaMiejsce());
-        }
         if(firstletter.equals("m")){
+
             master = 1;
-            Platform.runLater(() -> page.setAsMaster());
+//            Platform.runLater(() -> page.setAsMaster());
+
         }
 //        if(firstletter.equals("r")){
 //            Platform.runLater(()->page.przejdzDalej());
 //        }
-        if(firstletter.equals("k")) {
-//            Platform.runLater(()->page.czytajSlowa());
-
-            Integer slowo;
-            for(int i=0; i<20; i++){
-                slowo = Integer.parseInt(wiad.substring(2*i,2*i+2));
-                slowa.add(slowo);
+        else if(firstletter.equals("k")) {
+            if(iloscGier == wymaganaIloscGier){
+                Stale.getWk().zakonczGre();
+                stop = true;
             }
-            Platform.runLater(()->page.przejdzDalej());
+            else{
+                tab = new byte[41];
+                runda =0;
+                slowa = new ArrayList<Integer>();
+                rigAns= new ArrayList<Integer>();
+                wrAns = new ArrayList<Integer>();
+                zgadniete = new ArrayList<Integer>(20);
+                drugaRunda = new ArrayList<Integer>(20);
+                for(int i = 0; i<20; i++){
+                    zgadniete.add(0);
+                    drugaRunda.add(0);
+                }
+                zapisanaWiadomosc = "";
+                jestWiad = false;
+                wynikDobre = 0;
+                wynikZle = 0;
+                wymaganeDobre = 10;
+                wymaganeZle = 4;
+                iloscRund = 0;
+                wymaganailoscrund = 6;
+                Integer slowo;
+                for(int i=0; i<20; i++){
+                    slowo = Integer.parseInt(wiad.substring(2*i,2*i+2));
+                    slowa.add(slowo);
+                }
+                Platform.runLater(()->page.przejdzDalej());
+            }
         }
-        if(firstletter.equals("a")){
+        else if(firstletter.equals("a")){
 //            Platform.runLater(()->page.ustawKlucz());
 
             Integer slowo;
@@ -132,24 +181,26 @@ public class ReadKlien implements Runnable{
                 slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
                 Stale.getRk().getRigAns().add(slowo);
             }
-            for (int i=10; i<14; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
+            for (int i=9; i<14; i++)            //zapisuje do List RighAns i WrAns złe i dobre odpowiedzi
             {
                 slowo=Integer.parseInt(Stale.getRk().getWiad().substring(2*i,2*i+2));
                 Stale.getRk().getWrAns().add(slowo);
             }
-
             Platform.runLater(()->page.wypelnijPrzyciski());
 
         }
 
-        if(firstletter.equals("t")){
+        else if(firstletter.equals("t")){
             Platform.runLater(()->page.startTimer());
         }
-        if(firstletter.equals("h")){
+        else if(firstletter.equals("h")){
             runda = 0;
+			for(int i =0; i< 20;i++){
+                drugaRunda.set(i,0);
+            }
             Platform.runLater(()->page.odbierzPodpowiedz());
         }
-        if(firstletter.equals("d")){
+        else if(firstletter.equals("d")){
             runda = 1;
             for(int i=0; i < wiad.length()/2;i++){
                 drugaRunda.set(Integer.parseInt(wiad.substring(2*i,2*i+2)),1);
@@ -161,15 +212,65 @@ public class ReadKlien implements Runnable{
                 Platform.runLater(()->page.odbierzDrugaTure());
             }
         }
-        if(firstletter.equals("w")){
+        else if(firstletter.equals("w")){
+            iloscRund++;
             for(int i=0; i < wiad.length()/2;i++){
-                zgadniete.set(Integer.parseInt(wiad.substring(2*i,2*i+2)),1);
+                int odp = Integer.parseInt(wiad.substring(2*i,2*i+2));
+                zgadniete.set(odp,1);
+                if(isRight(odp))wynikDobre++;
+                if(isWrong(odp))wynikZle++;
             }
-            Platform.runLater(()->page.updatePrzyciski());
+            if(wynikZle >= wymaganeZle){//TODO licznie punktow
+                //koniec przegranko
+               Platform.runLater(()-> page.showAlertAboutGameStatus("Runda przegrana: udzielono zbyt wiele niepoprawnych odpowiedzi"));
+                if(master == 1){
+                    Stale.getWk().zakonczpartiePrzgranie();
+                    master=0;
+                }
+            }
+            else if(wynikDobre >= wymaganeDobre){
+                Platform.runLater(()-> page.showAlertAboutGameStatus("Brawo! Odgadliście już wszystkie poprawne odpowiedzi"));
+                if(master == 1){
+                    Stale.getWk().zakonczPartieWygranie();
+                    master=0;
+                }
+            }
+            else if(iloscRund ==6){
+                //przegranko
+                if(master==1){
+                    Platform.runLater(()-> page.showAlertAboutGameStatus("Niestety nie zdążyliście odgadnąć wszystkich poprawnych odpowiedzi"));
+                    Stale.getWk().zakonczpartiePrzgranie();
+                    master=0;
+                }
+            }
+			else{
+				 Platform.runLater(()->page.updatePrzyciski());
+			}
+			
+           
         }
-        if(firstletter.equals("y")){}
 //        Platform.runLater(() -> page.czytaj());
 
+    }
+
+    public boolean isRight(Integer index){
+        return rigAns.contains(Stale.getRk().getSlowa().get(index));
+    }
+    public boolean isWrong(Integer index){
+        return wrAns.contains(Stale.getRk().getSlowa().get(index));
+    }
+
+    public void updateWynik(){
+
+    }
+
+
+    public boolean isStop() {
+        return stop;
+    }
+
+    public void setStop(boolean stop) {
+        this.stop = stop;
     }
 
     public int getRunda() {

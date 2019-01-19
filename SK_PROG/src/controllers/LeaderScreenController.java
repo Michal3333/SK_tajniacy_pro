@@ -2,7 +2,11 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -51,12 +55,11 @@ LeaderScreenController extends MainContoller implements Initializable {
     }
 
     public String slowoAsText(Integer index){
-        return Words.words.get(index-1);  //@michal tu powinno być -1 xD jezu ile tego szukałem
+        return Words.words.get(index - 1);
     }
 
     public boolean isRight(Integer index){
-       return Stale.getRk().getRigAns().contains(index);
-
+        return Stale.getRk().getRigAns().contains(index);
     }
     public boolean isWrong(Integer index){
         return Stale.getRk().getWrAns().contains(index);
@@ -74,10 +77,32 @@ LeaderScreenController extends MainContoller implements Initializable {
                     e.printStackTrace();
                 }
             }
-        },22*1000);
+        },30*1000);
     }
 
     public void updatePrzyciski(){
+        if(Stale.getRk().getZgadniete().get(0)==1)slowo1.setText("");
+        if(Stale.getRk().getZgadniete().get(1)==1)slowo2.setText("");
+        if(Stale.getRk().getZgadniete().get(2)==1)slowo3.setText("");
+        if(Stale.getRk().getZgadniete().get(3)==1)slowo4.setText("");
+        if(Stale.getRk().getZgadniete().get(4)==1)slowo5.setText("");
+        if(Stale.getRk().getZgadniete().get(5)==1)slowo6.setText("");
+        if(Stale.getRk().getZgadniete().get(6)==1)slowo7.setText("");
+        if(Stale.getRk().getZgadniete().get(7)==1)slowo8.setText("");
+        if(Stale.getRk().getZgadniete().get(8)==1)slowo9.setText("");
+        if(Stale.getRk().getZgadniete().get(9)==1)slowo10.setText("");
+        if(Stale.getRk().getZgadniete().get(10)==1)slowo11.setText("");
+        if(Stale.getRk().getZgadniete().get(11)==1)slowo12.setText("");
+        if(Stale.getRk().getZgadniete().get(12)==1)slowo13.setText("");
+        if(Stale.getRk().getZgadniete().get(13)==1)slowo14.setText("");
+        if(Stale.getRk().getZgadniete().get(14)==1)slowo15.setText("");
+        if(Stale.getRk().getZgadniete().get(15)==1)slowo16.setText("");
+        if(Stale.getRk().getZgadniete().get(16)==1)slowo17.setText("");
+        if(Stale.getRk().getZgadniete().get(17)==1)slowo18.setText("");
+        if(Stale.getRk().getZgadniete().get(18)==1)slowo19.setText("");
+        if(Stale.getRk().getZgadniete().get(19)==1)slowo20.setText("");
+
+
         play.setDisable(false);
     }
 
@@ -102,9 +127,6 @@ LeaderScreenController extends MainContoller implements Initializable {
         slowo18.setText(slowoAsText(Stale.getRk().getSlowa().get(17)));
         slowo19.setText(slowoAsText(Stale.getRk().getSlowa().get(18)));
         slowo20.setText(slowoAsText(Stale.getRk().getSlowa().get(19)));
-
-        while(Stale.getRk().getRigAns().size()<10);
-        while(Stale.getRk().getWrAns().size()<4);
         if(isRight(Stale.getRk().getSlowa().get(0))){slowo1.textFillProperty().setValue(Color.GREEN);}
         else if(isWrong(Stale.getRk().getSlowa().get(0))){slowo1.textFillProperty().setValue(Color.RED);}
         if(isRight(Stale.getRk().getSlowa().get(1))){slowo2.textFillProperty().setValue(Color.GREEN);}
@@ -153,5 +175,59 @@ LeaderScreenController extends MainContoller implements Initializable {
     public void wyslijPod(ActionEvent actionEvent) throws IOException {
         Stale.getWk().wyslijPodpowiedz(hint.getText(), Integer.parseInt(numberOfWords.getText()));
         play.setDisable(true);
+    }
+    @Override
+    public void przejdzDalej(){
+        if(Stale.getRk().getMaster() == 0) {
+            try {
+                LoginScreenController.stage.setScene(utwurzGre());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(Stale.getRk().getMaster() == 1){
+            try {
+                LoginScreenController.stage.setScene(utwurzGreMain());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private Scene utwurzGre() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/NormalGameScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+
+    private Scene utwurzGreMain() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LeaderScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+
+    private Scene utwurzLoginScreen() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/LoginScreen.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        return scene;
+    }
+    public void showAlertAboutGameStatus(String info) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wynik rundy");
+        alert.setContentText(info);
+
+        alert.showAndWait();
+
+    }
+
+    @Override
+    public void goLogin(){
+        try {
+            LoginScreenController.stage.setScene(utwurzLoginScreen());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
