@@ -105,6 +105,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     }
 
     public void odbierzPodpowiedz(){
+		updatePrzyciski();
         ilosc.setText(Stale.getRk().getWiad().substring(0,1));
         podpowiedz.setText(Stale.getRk().getWiad().substring(1));
         voteInfo.setText("");

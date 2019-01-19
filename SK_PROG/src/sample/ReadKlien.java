@@ -195,6 +195,9 @@ public class ReadKlien implements Runnable{
         }
         else if(firstletter.equals("h")){
             runda = 0;
+			for(int i =0; i< 20;i++){
+                drugaRunda.set(i,0);
+            }
             Platform.runLater(()->page.odbierzPodpowiedz());
         }
         else if(firstletter.equals("d")){
@@ -240,7 +243,11 @@ public class ReadKlien implements Runnable{
                     master=0;
                 }
             }
-            Platform.runLater(()->page.updatePrzyciski());
+			else{
+				 Platform.runLater(()->page.updatePrzyciski());
+			}
+			
+           
         }
 //        Platform.runLater(() -> page.czytaj());
 
