@@ -215,6 +215,7 @@ LeaderScreenController extends MainContoller implements Initializable {
     }
     public void showAlertAboutGameStatus(String info) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
         alert.setTitle("Wynik rundy");
         alert.setContentText(info);
 

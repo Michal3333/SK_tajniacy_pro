@@ -19,7 +19,7 @@
     <Label fx:id="gracz4" layoutX="77.0" layoutY="335.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
     <Label fx:id="gracz5" layoutX="77.0" layoutY="405.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
     <Button fx:id="rozpocznijButton" layoutX="534.0" layoutY="405.0" mnemonicParsing="false" onAction="#rozpocznij" prefHeight="70.0" prefWidth="187.0" text="Rozpocznij Grę" />
-    <Label layoutX="480.0" layoutY="290.0" text="Poziom:" />
+    <Label fx:id="poziom" layoutX="480.0" layoutY="290.0" text="Poziom:" />
     <ChoiceBox fx:id="box" layoutX="585.0" layoutY="285.0" prefWidth="136.0">
       <items>
         <FXCollections fx:factory="observableArrayList">

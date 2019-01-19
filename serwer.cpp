@@ -31,7 +31,7 @@ int iloscpodpowiedzi;
 int przegraneRundy=0;
 int wtgraneRundy=0;
 int iloscgier = 0;
-int wymaganaIloscGier = 2; //TODO ustawaic od graczy
+int wymaganaIloscGier = 4; //TODO ustawaic od graczy
 bool notStarted = true;
 
 void OdblokujWszystkich(){
@@ -122,21 +122,20 @@ void obsluz(char polecenie, int sender) {
             write(1, "\n", 1);
         }
     } else if (polecenie == 'r') { //rozpoczęcie gry
-//        for (int i = 0; i < numberPlayer; i++) {
-//            write(playersFd[i], "r", 1);
-//        }
+
         notStarted = false;
         int n;
         bool unique;
         char tabtemp[42];
         string wiad;
-        if(numberPlayer < 5) wiad="i0"+ to_string(2*numberPlayer) + ",";
+        wymaganaIloscGier=2*numberPlayer;
+        if(numberPlayer < 5) wiad="i0"+ to_string(2*numberPlayer) + temp.substr(1,1) + ",";
         else wiad="i10,"; //bo max=5, więc 2x5=10 quickmaths
         strcpy(tabtemp, wiad.c_str());
 
         for (int i = 0; i < 5; i++) {
             if (playersFd[i] != -1) {
-                write(playersFd[i], tabtemp, 4);   //wysyłanie info o ilosci rund do wszystkich
+                write(playersFd[i], tabtemp, 5);   //wysyłanie info o ilosci rund do wszystkich
             }
         }
                 for (int i = 0; i < 20; i++) {

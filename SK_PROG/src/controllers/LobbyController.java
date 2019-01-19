@@ -26,6 +26,7 @@ public class LobbyController extends MainContoller implements Initializable {
     public Label gracz4;
     public Label gracz5;
     public int labels;
+    public Label poziom;
     public Button rozpocznijButton;
     public ChoiceBox box = new ChoiceBox(FXCollections.observableArrayList(
              "Łatwy", "Zaawansowany", "Ekspert")
@@ -43,6 +44,7 @@ public class LobbyController extends MainContoller implements Initializable {
         }
         if(Stale.getRk().getMaster() != 1){
             box.setVisible(false);
+            poziom.setVisible(false);
             rozpocznijButton.setDisable(true);
         }
 
