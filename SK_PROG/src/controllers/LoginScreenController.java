@@ -1,12 +1,7 @@
 package controllers;
 
 
-import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +13,6 @@ import sample.ReadKlien;
 import sample.Stale;
 import sample.WriteKlient;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class LoginScreenController extends MainContoller{

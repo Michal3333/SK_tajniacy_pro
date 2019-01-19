@@ -69,6 +69,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public String slowoAsText(Integer index){
         return Words.words.get(index - 1);
     }
+
     public boolean isRight(Integer index){
         return Stale.getRk().getRigAns().contains(Stale.getRk().getSlowa().get(index));
     }
@@ -166,7 +167,6 @@ public class NormalGameScreenController extends MainContoller implements Initial
         wyraz18.setText(slowoAsText(Stale.getRk().getSlowa().get(17)));
         wyraz19.setText(slowoAsText(Stale.getRk().getSlowa().get(18)));
         wyraz20.setText(slowoAsText(Stale.getRk().getSlowa().get(19)));
-
     }
 
     public void updatePrzyciski(){

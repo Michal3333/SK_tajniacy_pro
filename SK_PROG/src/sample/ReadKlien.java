@@ -16,6 +16,8 @@ public class ReadKlien implements Runnable{
     private String wiad;
     private MainContoller page;
     private int master;
+    private boolean jestWiad;
+    private String  zapisanaWiad;
     private ArrayList<Integer> slowa;
     private ArrayList<Integer> rigAns;
     private ArrayList<Integer> wrAns;
@@ -41,6 +43,8 @@ public class ReadKlien implements Runnable{
         is = Stale.getSocket().getInputStream();
         tab = new byte[42];
         runda =0;
+        jestWiad = false;
+        zapisanaWiad= "";
         slowa = new ArrayList<Integer>();
         rigAns= new ArrayList<Integer>();
         wrAns = new ArrayList<Integer>();
@@ -66,6 +70,7 @@ public class ReadKlien implements Runnable{
         wymaganaIloscGier =2; //TODO ustawaic od graczy
 
     }
+
     public void read() throws IOException {
         while(true){
             if(stop)break;
@@ -75,7 +80,6 @@ public class ReadKlien implements Runnable{
                 break;
             }
             if(len > 0){
-
                 String temp = new String(tab);
 
                 temp = temp.substring(0,len);
@@ -99,8 +103,8 @@ public class ReadKlien implements Runnable{
                     zapisanaWiadomosc = temp;
                     jestWiad = true;
                 }
-
                 }
+            }
         }
     }
 

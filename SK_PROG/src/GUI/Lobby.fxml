@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LobbyController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LobbyController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b6c2cd" height="350.0" layoutX="77.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="317.0" />
       <Label fx:id="gracz1" layoutX="77.0" layoutY="125.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
@@ -13,6 +13,6 @@
       <Label fx:id="gracz3" layoutX="77.0" layoutY="265.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
       <Label fx:id="gracz4" layoutX="77.0" layoutY="335.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
       <Label fx:id="gracz5" layoutX="77.0" layoutY="405.0" prefHeight="70.0" prefWidth="317.0" text="Label" textAlignment="CENTER" />
-      <Button fx:id="rozpocznijButton" layoutX="654.0" layoutY="521.0" mnemonicParsing="false" text="Button" onAction="#rozpocznij"/>
+      <Button fx:id="rozpocznijButton" layoutX="534.0" layoutY="405.0" mnemonicParsing="false" onAction="#rozpocznij" prefHeight="70.0" prefWidth="187.0" text="Rozpocznij Grę" />
    </children>
 </AnchorPane>

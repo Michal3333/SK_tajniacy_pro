@@ -24,9 +24,10 @@ public class WriteKlient {
         os.write(wiadomosc);
     }
 
-
     public void rozpocznijGre() throws IOException {
+
         wiadomosc = "r,".getBytes();
+
         os.write(wiadomosc);
     }
 
@@ -42,6 +43,7 @@ public class WriteKlient {
 
     public void wyslijOdpowiedz(String odp) throws IOException {
         if(Stale.getRk().getRunda()==0){
+
             wiadomosc = ("o" + odp + ',').getBytes();
         }
         else if(Stale.getRk().getRunda()==1)

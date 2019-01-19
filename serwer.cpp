@@ -47,6 +47,7 @@ void ustawMainPlayera(int nr){
     currentPlayer = nr;
     write(playersFd[nr],"m,",2);
     cout<<"m,"<<endl;
+
 }
 void zeruj(){
     for(int i = 0; i < 20; i++){
@@ -91,6 +92,7 @@ void setTable(char *tab, string option){
 void obsluz(char polecenie, int sender) {
     if (polecenie == 'l') {
         int current;
+
         for (int i = 0; i < 5; i++) {
             if(playersFd[i]!=-1){
                 if (playersFd[i] != sender) {
@@ -165,6 +167,7 @@ void obsluz(char polecenie, int sender) {
                 write(1, "\n", 1);
             }
         }
+
     } else if (polecenie == 'h') {
         status = 1;
 
@@ -221,6 +224,7 @@ void obsluz(char polecenie, int sender) {
             status = 0;
             temp = podlicz();
             zeruj();
+
             temp = 'w' + temp + ",";
             for (int i = 0; i < 5; i++) {
                 if(playersFd[i] != -1){
@@ -289,6 +293,7 @@ void obsluz(char polecenie, int sender) {
                     write(playersFd[i], tabtemp, 42);
                 }
             }
+
         }
 
 
@@ -306,6 +311,9 @@ int main() {
     int userfd;
     int odp;
     int ewait;
+    char savedMsgBuffer[5][40];
+    int savedMsgLength[5];
+    for(int i=0;i<5;i++) savedMsgLength[i]=0;
     char buffer[40] = "dodano";
     sck_addr.sin_family = AF_INET;
     sck_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -393,7 +401,6 @@ int main() {
                     epoll_ctl(epollfd, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     close(events[i].data.fd);
                 }
-
             }
         }
     }
