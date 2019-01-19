@@ -128,7 +128,18 @@ void obsluz(char polecenie, int sender) {
         notStarted = false;
         int n;
         bool unique;
-        for (int i = 0; i < 20; i++) {
+        char tabtemp[42];
+        string wiad;
+        if(numberPlayer < 5) wiad="i0"+ to_string(2*numberPlayer) + ",";
+        else wiad="i10,"; //bo max=5, więc 2x5=10 quickmaths
+        strcpy(tabtemp, wiad.c_str());
+
+        for (int i = 0; i < 5; i++) {
+            if (playersFd[i] != -1) {
+                write(playersFd[i], tabtemp, 4);   //wysyłanie info o ilosci rund do wszystkich
+            }
+        }
+                for (int i = 0; i < 20; i++) {
             n = rand() % 24 + 1;
             unique = true;
             for (int j = 0; j < i; j++) {
@@ -139,7 +150,6 @@ void obsluz(char polecenie, int sender) {
             } else i--;
         }
 
-        char tabtemp[42];
         setTable(tabtemp, "k");
         tabtemp[41] = ',';
 //        for (int i = 1; i < 41; i += 2) {
@@ -311,9 +321,6 @@ int main() {
     int userfd;
     int odp;
     int ewait;
-    char savedMsgBuffer[5][40];
-    int savedMsgLength[5];
-    for(int i=0;i<5;i++) savedMsgLength[i]=0;
     char buffer[40] = "dodano";
     sck_addr.sin_family = AF_INET;
     sck_addr.sin_addr.s_addr = htonl(INADDR_ANY);

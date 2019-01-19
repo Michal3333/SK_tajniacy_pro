@@ -53,7 +53,7 @@
     <Label fx:id="podpowiedz" layoutX="263.0" layoutY="78.0" text="Podpowiedz" />
     <Label fx:id="ilosc" layoutX="481.0" layoutY="78.0" text="ilosc" />
     <Button fx:id="wysOdp" layoutX="374.0" layoutY="550.0" mnemonicParsing="false" onAction="#wyslijOdp" text="Wyslij Odpowiedz" />
-    <Label fx:id="voteInfo" layoutX="154.0" layoutY="14.0" prefHeight="40.0" prefWidth="493.0" text="">
+    <Label fx:id="voteInfo" layoutX="154.0" layoutY="14.0" prefHeight="40.0" prefWidth="550.0" text="">
       <font>
         <Font size="18.0" />
       </font>

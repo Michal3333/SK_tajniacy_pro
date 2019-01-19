@@ -1,11 +1,14 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -23,6 +26,13 @@ public class LobbyController extends MainContoller implements Initializable {
     public Label gracz5;
     public int labels;
     public Button rozpocznijButton;
+    ObservableList<String> options =
+            FXCollections.observableArrayList(
+                    "Option 1",
+                    "Option 2",
+                    "Option 3"
+            );
+    final ComboBox comboBox = new ComboBox(options);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +45,7 @@ public class LobbyController extends MainContoller implements Initializable {
             e.printStackTrace();
         }
         if(Stale.getRk().getMaster() != 1){
+            comboBox.setVisible(false);
             rozpocznijButton.setDisable(true);
         }
 
