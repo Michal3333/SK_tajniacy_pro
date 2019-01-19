@@ -171,123 +171,123 @@ public class NormalGameScreenController extends MainContoller implements Initial
 
     public void updatePrzyciski(){
         if(Stale.getRk().getZgadniete().get(0) == 1){
-            if(isRight(0)){wyraz1.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(0)){wyraz1.textFillProperty().setValue(Color.RED);}
-            else {wyraz1.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(0)){wyraz1.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(0)){wyraz1.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz1.setStyle("-fx-background-color: #F0E68C");}
             wyraz1.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(1) == 1){
-            if(isRight(1)){wyraz2.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(1)){wyraz2.textFillProperty().setValue(Color.RED);}
-            else {wyraz2.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(1)){wyraz2.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(1)){wyraz2.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz2.setStyle("-fx-background-color: #F0E68C");}
             wyraz2.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(2) == 1){
-            if(isRight(2)){wyraz3.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(2)){wyraz3.textFillProperty().setValue(Color.RED);}
-            else {wyraz3.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(2)){wyraz3.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(2)){wyraz3.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz3.setStyle("-fx-background-color: #F0E68C");}
             wyraz3.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(3) == 1){
-            if(isRight(3)){wyraz4.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(3)){wyraz4.textFillProperty().setValue(Color.RED);}
-            else {wyraz4.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(3)){wyraz4.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(3)){wyraz4.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz4.setStyle("-fx-background-color: #F0E68C");}
             wyraz4.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(4) == 1){
-            if(isRight(4)){wyraz5.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(4)){wyraz5.textFillProperty().setValue(Color.RED);}
-            else {wyraz5.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(4)){wyraz5.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(4)){wyraz5.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz5.setStyle("-fx-background-color: #F0E68C");}
             wyraz5.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(5) == 1){
-            if(isRight(5)){wyraz6.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(5)){wyraz6.textFillProperty().setValue(Color.RED);}
-            else {wyraz6.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(5)){wyraz6.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(5)){wyraz6.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz6.setStyle("-fx-background-color: #F0E68C");}
             wyraz6.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(6) == 1){
-            if(isRight(6)){wyraz7.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(6)){wyraz7.textFillProperty().setValue(Color.RED);}
-            else {wyraz7.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(6)){wyraz7.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(6)){wyraz7.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz7.setStyle("-fx-background-color: #F0E68C");}
             wyraz7.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(7) == 1){
-            if(isRight(7)){wyraz8.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(7)){wyraz8.textFillProperty().setValue(Color.RED);}
-            else {wyraz8.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(7)){wyraz8.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(7)){wyraz8.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz8.setStyle("-fx-background-color: #F0E68C");}
             wyraz8.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(8) == 1){
-            if(isRight(8)){wyraz9.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(8)){wyraz9.textFillProperty().setValue(Color.RED);}
-            else {wyraz9.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(8)){wyraz9.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(8)){wyraz9.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz9.setStyle("-fx-background-color: #F0E68C");}
             wyraz9.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(9) == 1){
-            if(isRight(9)){wyraz10.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(9)){wyraz10.textFillProperty().setValue(Color.RED);}
-            else {wyraz10.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(9)){wyraz10.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(9)){wyraz10.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz10.setStyle("-fx-background-color: #F0E68C");}
             wyraz10.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(10) == 1){
-            if(isRight(10)){wyraz11.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(10)){wyraz11.textFillProperty().setValue(Color.RED);}
-            else {wyraz11.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(10)){wyraz11.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(10)){wyraz11.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz11.setStyle("-fx-background-color: #F0E68C");}
             wyraz11.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(11) == 1){
-            if(isRight(11)){wyraz12.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(11)){wyraz12.textFillProperty().setValue(Color.RED);}
-            else {wyraz12.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(11)){wyraz12.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(11)){wyraz12.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz12.setStyle("-fx-background-color: #F0E68C");}
             wyraz12.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(12) == 1){
-            if(isRight(12)){wyraz13.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(12)){wyraz13.textFillProperty().setValue(Color.RED);}
-            else {wyraz13.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(12)){wyraz13.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(12)){wyraz13.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz13.setStyle("-fx-background-color: #F0E68C");}
             wyraz13.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(13) == 1){
-            if(isRight(13)){wyraz14.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(13)){wyraz14.textFillProperty().setValue(Color.RED);}
-            else {wyraz14.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(13)){wyraz14.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(13)){wyraz14.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz14.setStyle("-fx-background-color: #F0E68C");}
             wyraz14.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(14) == 1){
-            if(isRight(14)){wyraz15.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(14)){wyraz15.textFillProperty().setValue(Color.RED);}
-            else {wyraz15.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(14)){wyraz15.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(14)){wyraz15.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz15.setStyle("-fx-background-color: #F0E68C");}
             wyraz15.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(15) == 1){
-            if(isRight(15)){wyraz16.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(15)){wyraz16.textFillProperty().setValue(Color.RED);}
-            else {wyraz16.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(15)){wyraz16.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(15)){wyraz16.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz16.setStyle("-fx-background-color: #F0E68C");}
             wyraz16.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(16) == 1){
-            if(isRight(16)){wyraz17.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(16)){wyraz17.textFillProperty().setValue(Color.RED);}
-            else {wyraz17.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(16)){wyraz17.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(16)){wyraz17.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz17.setStyle("-fx-background-color: #F0E68C");}
             wyraz17.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(17) == 1){
-            if(isRight(17)){wyraz18.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(17)){wyraz18.textFillProperty().setValue(Color.RED);}
-            else {wyraz18.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(17)){wyraz18.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(17)){wyraz18.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz18.setStyle("-fx-background-color: #F0E68C");}
             wyraz18.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(18) == 1){
-            if(isRight(18)){wyraz19.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(18)){wyraz19.textFillProperty().setValue(Color.RED);}
-            else {wyraz19.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(18)){wyraz19.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(18)){wyraz19.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz19.setStyle("-fx-background-color: #F0E68C");}
             wyraz1.setDisable(true);
         }
         if(Stale.getRk().getZgadniete().get(19) == 1){
-            if(isRight(19)){wyraz20.textFillProperty().setValue(javafx.scene.paint.Color.GREEN);}
-            else if(isWrong(19)){wyraz20.textFillProperty().setValue(Color.RED);}
-            else {wyraz20.textFillProperty().setValue(Color.YELLOW);}
+            if(isRight(19)){wyraz20.setStyle("-fx-background-color: #98FB98");}
+            else if(isWrong(19)){wyraz20.setStyle("-fx-background-color: #FFA07A");}
+            else {wyraz20.setStyle("-fx-background-color: #F0E68C");}
             wyraz20.setDisable(true);
         }
         zeruj();
@@ -297,7 +297,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr1(ActionEvent actionEvent) {
         if(zaznaczone.get(0) == 0) {
             zaznaczone.set(0, 1);
-            wyraz1.setStyle("-fx-text-fill: green");
+            wyraz1.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(0,0);
@@ -308,7 +308,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr2(ActionEvent actionEvent) {
         if(zaznaczone.get(1) == 0) {
             zaznaczone.set(1, 1);
-            wyraz2.setStyle("-fx-text-fill: green");
+            wyraz2.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(1,0);
@@ -319,7 +319,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr3(ActionEvent actionEvent) {
         if(zaznaczone.get(2) == 0) {
             zaznaczone.set(2, 1);
-            wyraz3.setStyle("-fx-text-fill: green");
+            wyraz3.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(2,0);
@@ -330,7 +330,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr4(ActionEvent actionEvent) {
         if(zaznaczone.get(3) == 0) {
             zaznaczone.set(3, 1);
-            wyraz4.setStyle("-fx-text-fill: green");
+            wyraz4.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(3,0);
@@ -341,7 +341,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr5(ActionEvent actionEvent) {
         if(zaznaczone.get(4) == 0) {
             zaznaczone.set(4, 1);
-            wyraz5.setStyle("-fx-text-fill: green");
+            wyraz5.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(4,0);
@@ -352,7 +352,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr6(ActionEvent actionEvent) {
         if(zaznaczone.get(5) == 0) {
             zaznaczone.set(5, 1);
-            wyraz6.setStyle("-fx-text-fill: green");
+            wyraz6.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(5,0);
@@ -363,7 +363,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr7(ActionEvent actionEvent) {
         if(zaznaczone.get(6) == 0) {
             zaznaczone.set(6, 1);
-            wyraz7.setStyle("-fx-text-fill: green");
+            wyraz7.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(6,0);
@@ -374,7 +374,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr8(ActionEvent actionEvent) {
         if(zaznaczone.get(7) == 0) {
             zaznaczone.set(7, 1);
-            wyraz8.setStyle("-fx-text-fill: green");
+            wyraz8.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(7,0);
@@ -385,7 +385,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr9(ActionEvent actionEvent) {
         if(zaznaczone.get(8) == 0) {
             zaznaczone.set(8, 1);
-            wyraz9.setStyle("-fx-text-fill: green");
+            wyraz9.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(8,0);
@@ -396,7 +396,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr10(ActionEvent actionEvent) {
         if(zaznaczone.get(9) == 0) {
             zaznaczone.set(9, 1);
-            wyraz10.setStyle("-fx-text-fill: green");
+            wyraz10.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(9,0);
@@ -407,7 +407,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr11(ActionEvent actionEvent) {
         if(zaznaczone.get(10) == 0) {
             zaznaczone.set(10, 1);
-            wyraz11.setStyle("-fx-text-fill: green");
+            wyraz11.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(10,0);
@@ -418,7 +418,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr12(ActionEvent actionEvent) {
         if(zaznaczone.get(11) == 0) {
             zaznaczone.set(11, 1);
-            wyraz12.setStyle("-fx-text-fill: green");
+            wyraz12.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(11,0);
@@ -429,7 +429,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr13(ActionEvent actionEvent) {
         if(zaznaczone.get(12) == 0) {
             zaznaczone.set(12, 1);
-            wyraz13.setStyle("-fx-text-fill: green");
+            wyraz13.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(12,0);
@@ -440,7 +440,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr14(ActionEvent actionEvent) {
         if(zaznaczone.get(13) == 0) {
             zaznaczone.set(13, 1);
-            wyraz14.setStyle("-fx-text-fill: green");
+            wyraz14.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(13,0);
@@ -451,7 +451,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr15(ActionEvent actionEvent) {
         if(zaznaczone.get(14) == 0) {
             zaznaczone.set(14, 1);
-            wyraz15.setStyle("-fx-text-fill: green");
+            wyraz15.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(14,0);
@@ -462,7 +462,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr16(ActionEvent actionEvent) {
         if(zaznaczone.get(15) == 0) {
             zaznaczone.set(15, 1);
-            wyraz16.setStyle("-fx-text-fill: green");
+            wyraz16.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(15,0);
@@ -473,7 +473,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr17(ActionEvent actionEvent) {
         if(zaznaczone.get(16) == 0) {
             zaznaczone.set(16, 1);
-            wyraz17.setStyle("-fx-text-fill: green");
+            wyraz17.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(16,0);
@@ -484,7 +484,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr18(ActionEvent actionEvent) {
         if(zaznaczone.get(17) == 0) {
             zaznaczone.set(17, 1);
-            wyraz18.setStyle("-fx-text-fill: green");
+            wyraz18.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(17,0);
@@ -495,7 +495,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr19(ActionEvent actionEvent) {
         if(zaznaczone.get(18) == 0) {
             zaznaczone.set(18, 1);
-            wyraz19.setStyle("-fx-text-fill: green");
+            wyraz19.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(18,0);
@@ -506,7 +506,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void wyr20(ActionEvent actionEvent) {
         if(zaznaczone.get(19) == 0) {
             zaznaczone.set(19, 1);
-            wyraz20.setStyle("-fx-text-fill: green");
+            wyraz20.setStyle("-fx-background-color: #00ff00");
         }
         else{
             zaznaczone.set(19,0);
