@@ -395,6 +395,10 @@ int main() {
                             del = k;
                         }
                     }
+					if(numberPlayer == 0){
+						notStarted = true;
+						//zeroanie serwera
+					}
                     if(currentPlayer == del){
                         //next Round
                     }
