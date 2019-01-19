@@ -25,7 +25,6 @@ public class ReadKlien implements Runnable{
     private ArrayList<Integer> drugaRunda;
     private int runda;
     private String zapisanaWiadomosc;
-    private Boolean jestWiad;
     private int wynikDobre;
     private int wynikZle;
     private int wymaganeDobre;
@@ -67,7 +66,7 @@ public class ReadKlien implements Runnable{
         wymaganailoscrund = 6;
         stop = false;
         iloscGier = 0;
-        wymaganaIloscGier =2; //TODO ustawaic od graczy
+        //wymaganaIloscGier =2; //TODO ustawaic od graczy
 
     }
 
@@ -106,7 +105,7 @@ public class ReadKlien implements Runnable{
                 }
             }
         }
-    }
+
 
 
     public void action() throws IOException {
@@ -116,6 +115,9 @@ public class ReadKlien implements Runnable{
         wiad = wiad.substring(1);
         System.out.println(firstletter);
         System.out.println(wiad);
+        if(firstletter.equals("i")){
+            wymaganaIloscGier=Integer.parseInt(wiad);
+        }
         if(firstletter.equals("b")){
             Platform.runLater(() -> page.odblokuj());
         }
