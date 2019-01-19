@@ -250,6 +250,7 @@ void obsluz(char polecenie, int sender) {
         if(polecenie == 'f')wtgraneRundy++;
         else przegraneRundy++;
         iloscgier++;
+        cout<<"-----iloscrunf"<<iloscgier<<endl;
         if(iloscgier == wymaganaIloscGier){
             OdblokujWszystkich();
             //TODO zeruj serwer
@@ -405,11 +406,18 @@ int main() {
 						notStarted = true;
 						//zeroanie serwera
 					}
-                    if(currentPlayer == del){
-                        //next Round
-                    }
+
                     epoll_ctl(epollfd, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     close(events[i].data.fd);
+                    if(currentPlayer == del){
+                        //next Round
+                        obsluz('i',0);
+                    }
+                    if(numberPlayer == 1){
+                        write(playersFd[currentPlayer],"v,",2);
+                        notStarted = true;
+                        OdblokujWszystkich();
+                    }
                 }
             }
         }

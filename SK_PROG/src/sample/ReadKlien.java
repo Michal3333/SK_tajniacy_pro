@@ -97,7 +97,8 @@ public class ReadKlien implements Runnable{
                     }
                     else temp = temp.substring(temp.indexOf(",")+1);
                     System.out.println("wiad- "+wiad);
-                    action();
+                    if(!stop)action();
+
                 }
                 if(temp.length()>0){
                     zapisanaWiadomosc = temp;
@@ -116,6 +117,10 @@ public class ReadKlien implements Runnable{
         wiad = wiad.substring(1);
         System.out.println(firstletter);
         System.out.println(wiad);
+        if(firstletter.equals("v")){
+            Stale.getWk().zakonczGre();
+            stop = true;
+        }
         if(firstletter.equals("i")){ //wiadomość z poziomem i ilością gier
             wymaganaIloscGier= Integer.parseInt(wiad.substring(0,2));
             if(Integer.parseInt(wiad.substring(2))==0)wymaganailoscrund=7;   //łatwy
@@ -151,8 +156,11 @@ public class ReadKlien implements Runnable{
             if(iloscGier == wymaganaIloscGier){
                 Stale.getWk().zakonczGre();
                 stop = true;
+
             }
             else{
+                System.out.println("ilsocgier------------"+iloscGier);
+                iloscGier++;
                 tab = new byte[41];
                 runda =0;
                 slowa = new ArrayList<Integer>();
@@ -252,6 +260,13 @@ public class ReadKlien implements Runnable{
 			else{
 				 Platform.runLater(()->page.updatePrzyciski());
 			}
+
+            if(iloscGier == wymaganaIloscGier){
+                Stale.getWk().zakonczGre();
+                stop = true;
+
+            }
+
 			
            
         }
