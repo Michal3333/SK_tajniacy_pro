@@ -2,7 +2,6 @@ package sample;
 
 import controllers.LoginScreenController;
 import controllers.MainContoller;
-import controllers.LobbyController;
 import javafx.application.Platform;
 
 import java.io.IOException;
@@ -34,6 +33,7 @@ public class ReadKlien implements Runnable{
     private boolean stop;
     private int iloscGier;
     private int wymaganaIloscGier;
+
 
 
     public ReadKlien(LoginScreenController page1) throws IOException {
@@ -215,12 +215,14 @@ public class ReadKlien implements Runnable{
             }
             if(wynikZle >= wymaganeZle){//TODO licznie punktow
                 //koniec przegranko
+               Platform.runLater(()-> page.showAlertAboutGameStatus("Runda przegrana: udzielono zbyt wiele niepoprawnych odpowiedzi"));
                 if(master == 1){
                     Stale.getWk().zakonczpartiePrzgranie();
                     master=0;
                 }
             }
             else if(wynikDobre >= wymaganeDobre){
+                Platform.runLater(()-> page.showAlertAboutGameStatus("Brawo! Odgadliście już wszystkie poprawne odpowiedzi"));
                 if(master == 1){
                     Stale.getWk().zakonczPartieWygranie();
                     master=0;
@@ -229,6 +231,7 @@ public class ReadKlien implements Runnable{
             else if(iloscRund ==6){
                 //przegranko
                 if(master==1){
+                    Platform.runLater(()-> page.showAlertAboutGameStatus("Niestety nie zdążyliście odgadnąć wszystkich poprawnych odpowiedzi"));
                     Stale.getWk().zakonczpartiePrzgranie();
                     master=0;
                 }

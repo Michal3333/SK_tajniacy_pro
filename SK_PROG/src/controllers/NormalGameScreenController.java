@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -46,7 +47,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public Button wysOdp;
     public Label podpowiedz;
     public Label ilosc;
-
+    public Label voteInfo;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -105,6 +106,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     public void odbierzPodpowiedz(){
         ilosc.setText(Stale.getRk().getWiad().substring(0,1));
         podpowiedz.setText(Stale.getRk().getWiad().substring(1));
+        voteInfo.setText("");
         zeruj();
         zerujZaznaczone();
         wysOdp.setDisable(false);
@@ -113,6 +115,7 @@ public class NormalGameScreenController extends MainContoller implements Initial
     }
 
     public void odbierzDrugaTure(){
+        voteInfo.setText("Oto wybrane wśród graczy odpowiedzi - zagłosuj!");
         zeruj();
         updatePrzyciski();
         if(Stale.getRk().getDrugaRunda().get(0) == 0){ wyraz1.setDisable(true); }
@@ -563,6 +566,16 @@ public class NormalGameScreenController extends MainContoller implements Initial
         Scene scene = new Scene(root);
         return scene;
     }
+    public void showAlertAboutGameStatus(String info) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Wynik rundy");
+        alert.setContentText(info);
+
+        alert.showAndWait();
+
+    }
+
     public void goLogin(){
         try {
             LoginScreenController.stage.setScene(utwurzLoginScreen());

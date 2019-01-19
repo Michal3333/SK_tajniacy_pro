@@ -15,4 +15,6 @@ public abstract class MainContoller {
     public void zostanPrzyjety(){}
     public void nieZostanPrzyjety(){}
     public void odblokuj(){}
+    public void showAlertAboutGameStatus(String info) {}
+
 }

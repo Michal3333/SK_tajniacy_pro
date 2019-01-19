@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -80,6 +81,28 @@ LeaderScreenController extends MainContoller implements Initializable {
     }
 
     public void updatePrzyciski(){
+        if(Stale.getRk().getZgadniete().get(0)==1)slowo1.setText("");
+        if(Stale.getRk().getZgadniete().get(1)==1)slowo2.setText("");
+        if(Stale.getRk().getZgadniete().get(2)==1)slowo3.setText("");
+        if(Stale.getRk().getZgadniete().get(3)==1)slowo4.setText("");
+        if(Stale.getRk().getZgadniete().get(4)==1)slowo5.setText("");
+        if(Stale.getRk().getZgadniete().get(5)==1)slowo6.setText("");
+        if(Stale.getRk().getZgadniete().get(6)==1)slowo7.setText("");
+        if(Stale.getRk().getZgadniete().get(7)==1)slowo8.setText("");
+        if(Stale.getRk().getZgadniete().get(8)==1)slowo9.setText("");
+        if(Stale.getRk().getZgadniete().get(9)==1)slowo10.setText("");
+        if(Stale.getRk().getZgadniete().get(10)==1)slowo11.setText("");
+        if(Stale.getRk().getZgadniete().get(11)==1)slowo12.setText("");
+        if(Stale.getRk().getZgadniete().get(12)==1)slowo13.setText("");
+        if(Stale.getRk().getZgadniete().get(13)==1)slowo14.setText("");
+        if(Stale.getRk().getZgadniete().get(14)==1)slowo15.setText("");
+        if(Stale.getRk().getZgadniete().get(15)==1)slowo16.setText("");
+        if(Stale.getRk().getZgadniete().get(16)==1)slowo17.setText("");
+        if(Stale.getRk().getZgadniete().get(17)==1)slowo18.setText("");
+        if(Stale.getRk().getZgadniete().get(18)==1)slowo19.setText("");
+        if(Stale.getRk().getZgadniete().get(19)==1)slowo20.setText("");
+
+
         play.setDisable(false);
     }
 
@@ -190,6 +213,15 @@ LeaderScreenController extends MainContoller implements Initializable {
         Scene scene = new Scene(root);
         return scene;
     }
+    public void showAlertAboutGameStatus(String info) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wynik rundy");
+        alert.setContentText(info);
+
+        alert.showAndWait();
+
+    }
+
     @Override
     public void goLogin(){
         try {

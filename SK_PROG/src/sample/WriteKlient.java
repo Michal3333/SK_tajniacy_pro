@@ -1,7 +1,8 @@
 package sample;
 
 import javafx.application.Platform;
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -88,4 +89,6 @@ public class WriteKlient {
     public void setWiadomosc(byte[] wiadomosc) {
         this.wiadomosc = wiadomosc;
     }
+
+
 }
