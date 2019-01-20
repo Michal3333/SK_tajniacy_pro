@@ -152,7 +152,7 @@ void obsluz(char polecenie, int sender) {
             }
         }
                 for (int i = 0; i < 20; i++) {
-            n = rand() % 24 + 1;
+            n = rand() % 99 + 1;
             unique = true;
             for (int j = 0; j < i; j++) {
                 if (numbers[j] == n) unique = false;     //generowanie unikalnych numerów

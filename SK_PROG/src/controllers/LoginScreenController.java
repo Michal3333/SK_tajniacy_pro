@@ -24,6 +24,7 @@ public class LoginScreenController extends MainContoller{
     public Button button;
     public TextField InetAddress;
     public TextField Port;
+    public Label info;
 
     public void conect(ActionEvent actionEvent) throws IOException {
         Stale.setKliknal(1);
@@ -52,9 +53,11 @@ public class LoginScreenController extends MainContoller{
     }
     public void nieZostanPrzyjety(){
         button.setDisable(true);
+        info.setVisible(true);
     }
     public void odblokuj(){
         button.setDisable(false);
+        info.setVisible(false);
     }
 
 
