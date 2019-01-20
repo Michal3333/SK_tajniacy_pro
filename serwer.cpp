@@ -16,6 +16,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdlib>
+#include <inttypes.h>
 using namespace std;
 int playersFd[10];
 int oczekujacy[20];
@@ -323,7 +324,11 @@ void obsluz(char polecenie, int sender) {
     }
 }
 
-int main() {
+int main(int argc, char ** argv) {
+    if(argc!=3) {
+        perror("Czy nie zapomniałeś wskazać adresu i portu?");
+        exit(0);
+    }
     for(int i =0; i< 5 ;i++){
         playersFd[i] = -1;
     }
@@ -336,8 +341,9 @@ int main() {
     int ewait;
     char buffer[40] = "dodano";
     sck_addr.sin_family = AF_INET;
-    sck_addr.sin_addr.s_addr = htonl(INADDR_ANY);
-    sck_addr.sin_port = htons(1234);
+    sck_addr.sin_addr.s_addr = inet_addr(argv[1]);
+
+    sck_addr.sin_port = htons(atoi(argv[2]));
     int serwersock = socket(AF_INET, SOCK_STREAM, 0);
     bind(serwersock, (struct sockaddr*)&sck_addr, sizeof(struct sockaddr));
     listen(serwersock, 10);
