@@ -3,6 +3,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,8 +16,10 @@ import sample.WriteKlient;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginScreenController extends MainContoller{
+public class LoginScreenController extends MainContoller implements Initializable {
 
 
     public static Stage stage;
@@ -26,10 +29,15 @@ public class LoginScreenController extends MainContoller{
     public TextField Port;
     public Label info;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    info.setVisible(false);
+    }
+
     public void conect(ActionEvent actionEvent) throws IOException {
         Stale.setKliknal(1);
         String nick = nikcField.getText();
-        Stale.setSocket(new Socket((InetAddress.getText()=="" ?  InetAddress.getText() : "127.0.0.1"), (Port.getText()=="" ?  Integer.parseInt(Port.getText()) : 1234)));
+        Stale.setSocket(new Socket((InetAddress.getText().equals("") ?  InetAddress.getText() : "127.0.0.1"), (Port.getText().equals("") ?  Integer.parseInt(Port.getText()) : 1234)));
         Stale.setRk(new ReadKlien(this));
         Stale.setWk(new WriteKlient(nick));
         Stale.getRk().ropocnij();
@@ -39,8 +47,7 @@ public class LoginScreenController extends MainContoller{
     private Scene utwurzLobby() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Lobby.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
-        return scene;
+        return new Scene(root);
     }
 
     public void zostanPrzyjety(){
