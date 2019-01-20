@@ -239,7 +239,6 @@ public class ReadKlien implements Runnable{
             }
         }
         else if(firstletter.equals("w")){
-            iloscRund++;
             for(int i=0; i < wiad.length()/2;i++){
                 int odp = Integer.parseInt(wiad.substring(2*i,2*i+2));
                 zgadniete.set(odp,1);
@@ -253,12 +252,20 @@ public class ReadKlien implements Runnable{
                     Stale.getWk().zakonczpartiePrzgranie();
                     master=0;
                 }
+                if(iloscGier == wymaganaIloscGier){
+                    Stale.getWk().zakonczGre();
+                    stop = true;
+                }
             }
             else if(wynikDobre >= wymaganeDobre){
                 Platform.runLater(()-> page.showAlertAboutGameStatus("Brawo! Odgadliście już wszystkie poprawne odpowiedzi"));
                 if(master == 1){
                     Stale.getWk().zakonczPartieWygranie();
                     master=0;
+                }
+                if(iloscGier == wymaganaIloscGier){
+                    Stale.getWk().zakonczGre();
+                    stop = true;
                 }
             }
             else if(iloscRund ==wymaganailoscrund){
@@ -268,19 +275,15 @@ public class ReadKlien implements Runnable{
                     Stale.getWk().zakonczpartiePrzgranie();
                     master=0;
                 }
+                if(iloscGier == wymaganaIloscGier){
+                    Stale.getWk().zakonczGre();
+                    stop = true;
+                }
             }
 			else{
 				 Platform.runLater(()->page.updatePrzyciski());
 			}
 
-            if(iloscGier == wymaganaIloscGier){
-                Stale.getWk().zakonczGre();
-                stop = true;
-
-            }
-
-			
-           
         }
 //        Platform.runLater(() -> page.czytaj());
 
