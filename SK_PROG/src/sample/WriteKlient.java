@@ -9,11 +9,13 @@ import java.io.OutputStream;
 public class WriteKlient {
     private OutputStream os;
     private String nick;
+    private int zalogowany;
     byte [] wiadomosc;
     public WriteKlient(String nick1) throws IOException {
         os = Stale.getSocket().getOutputStream();
         wiadomosc = new byte[16];
         nick = nick1;
+        zalogowany = 0;
 
     }
     public void write() throws IOException {
@@ -60,17 +62,30 @@ public class WriteKlient {
         os.write(wiadomosc);
     }
     public void wyjdz() throws IOException {
-        wiadomosc = "".getBytes();
-        os.write(wiadomosc);
-        Stale.getRk().setStop(true);
-        Stale.getSocket().close();
+        if(zalogowany == 1){
+            Stale.setKliknal(0);
+            wiadomosc = "".getBytes();
+            os.write(wiadomosc);
+            Stale.getRk().setStop(true);
+            Stale.getSocket().close();
+
+        }
     }
     public void zakonczGre() throws IOException {
+        Stale.setKliknal(0);
         wiadomosc = "".getBytes();
         os.write(wiadomosc);
         Stale.getRk().setStop(true);
         Stale.getSocket().close();
         Platform.runLater(()->Stale.getRk().getPage().goLogin());
+    }
+
+    public int getZalogowany() {
+        return zalogowany;
+    }
+
+    public void setZalogowany(int zalogowany) {
+        this.zalogowany = zalogowany;
     }
 
     public String getNick() { return nick; }

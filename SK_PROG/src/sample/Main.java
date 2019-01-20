@@ -20,7 +20,10 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(rec -> {
             try {
-                Stale.getWk().wyjdz();
+                if(Stale.getKliknal() == 1){
+                    Stale.getWk().wyjdz();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

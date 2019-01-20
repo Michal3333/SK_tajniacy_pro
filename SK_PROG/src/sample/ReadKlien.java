@@ -128,6 +128,9 @@ public class ReadKlien implements Runnable{
             else if(Integer.parseInt(wiad.substring(2))==2)wymaganailoscrund=4; //Ekspert
 
         }
+        if(firstletter.equals("x")){
+            Platform.runLater(() -> page.usunUzupelnieniGracza(Integer.parseInt(wiad)));
+        }
         if(firstletter.equals("b")){
             Platform.runLater(() -> page.odblokuj());
         }
@@ -136,12 +139,21 @@ public class ReadKlien implements Runnable{
         }
         if(firstletter.equals("z")){
             Platform.runLater(() -> page.zostanPrzyjety());
+            Stale.getWk().setZalogowany(1);
         }
         if(firstletter.equals("l")){
-            Platform.runLater(() -> page.uzupenijGracza(0));
+            int nr = Integer.parseInt(wiad.substring(0,1));
+            wiad = wiad.substring(1);
+            String tempwiad = wiad;
+            System.out.println("numer dpdawameho --" + nr + " " + wiad );
+            Platform.runLater(() -> page.uzupenijGracza(0,nr, tempwiad));
         }
         if(firstletter.equals("s")){
-            Platform.runLater(() -> page.uzupenijGracza(1));
+            int nr = Integer.parseInt(wiad.substring(0,1));
+            wiad = wiad.substring(1);
+            String tempwiad = wiad;
+            System.out.println("numer dpdawameho --" + nr + " " + wiad );
+            Platform.runLater(() -> page.uzupenijGracza(1,nr, tempwiad));
         }
         if(firstletter.equals("m")){
 

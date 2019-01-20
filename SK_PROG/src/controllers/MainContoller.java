@@ -1,7 +1,7 @@
 package controllers;
 
 public abstract class MainContoller {
-    public void uzupenijGracza(int i){}
+    public void uzupenijGracza(int i,int k, String n){}
     public void setAsMaster(){}
     public void wypelnijPrzyciski(){}
     public void updatePrzyciski(){}
@@ -16,5 +16,6 @@ public abstract class MainContoller {
     public void nieZostanPrzyjety(){}
     public void odblokuj(){}
     public void showAlertAboutGameStatus(String info) {}
+    public void usunUzupelnieniGracza(int numer){}
 
 }

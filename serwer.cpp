@@ -93,33 +93,46 @@ void obsluz(char polecenie, int sender) {
     if (polecenie == 'l') {
         int current;
 
+        for(int i=0;i<5 ;i++){
+            if(playersFd[i] == sender){
+                current = i;
+            }
+        }
+            cout<<"wysylam wszytkim nowego"<<endl;
         for (int i = 0; i < 5; i++) {
             if(playersFd[i]!=-1){
-                if (playersFd[i] != sender) {
-                    char tabtemp[21];
-                    temp = temp + ",";
-                    strcpy(tabtemp, temp.c_str());
-                    write(playersFd[i], tabtemp, temp.size());
-                    write(1, tabtemp, temp.size());
-                    write(1, "\n", 1);
-                } else {
-                    current = i;
+                if (playersFd[i] == sender){
                     playersNicks[i] = temp;
+
+                }
+                else{
+                    char tabtemp[21];
+                    string nickznumerem ="";
+                    nickznumerem = temp[0] + to_string(current) + temp.substr(1) + ",";
+                    strcpy(tabtemp, nickznumerem.c_str());
+                    write(playersFd[i], tabtemp, nickznumerem.size());
+                    write(1, tabtemp, nickznumerem.size());
+                    write(1, "\n", 1);
                 }
             }
         }
-        for (int i = 0; i < current; i++) {
-            char tabtemp[21];
-            string nickname = playersNicks[i] + ",";
-            strcpy(tabtemp, nickname.c_str());
+        cout<<"wysylam nowemu wysztskich"<<endl;
+        for (int i = 0; i < 5; i++) {
+            if(playersFd[i] != -1 ){
+                char tabtemp[21];
+                string nickname = playersNicks[i] + ",";
+                string nickznumerem ="";
+                nickznumerem = nickname[0] + to_string(i) + nickname.substr(1);
+                strcpy(tabtemp, nickznumerem.c_str());
 
-            if (i == currentPlayer) {
-                tabtemp[0] = 's';
+                if (i == currentPlayer) {
+                    tabtemp[0] = 's';
+                }
+
+                write(sender, tabtemp, nickznumerem.size());
+                write(1, tabtemp, nickznumerem.size());
+                write(1, "\n", 1);
             }
-
-            write(sender, tabtemp, nickname.size());
-            write(1, tabtemp, nickname.size());
-            write(1, "\n", 1);
         }
     } else if (polecenie == 'r') { //rozpoczęcie gry
 
@@ -130,7 +143,7 @@ void obsluz(char polecenie, int sender) {
         string wiad;
         wymaganaIloscGier=2*numberPlayer;
         if(numberPlayer < 5) wiad="i0"+ to_string(2*numberPlayer) + temp.substr(1,1) + ",";
-        else wiad="i10,"; //bo max=5, więc 2x5=10 quickmaths
+        else wiad="i10,"; //bo max=5, więc 2x5=10 quickmaths XD
         strcpy(tabtemp, wiad.c_str());
 
         for (int i = 0; i < 5; i++) {
@@ -185,9 +198,9 @@ void obsluz(char polecenie, int sender) {
            if(playersFd[i] != -1){
                if (i != currentPlayer) {
                    char tabtemp[21];
-                   temp = temp + ",";
-                   strcpy(tabtemp, temp.c_str());
-                   write(playersFd[i], tabtemp, temp.size());
+                   string zprzecinkiem = temp+",";
+                   strcpy(tabtemp, zprzecinkiem.c_str());
+                   write(playersFd[i], tabtemp, zprzecinkiem.size());
                    cout<<tabtemp<<endl;
                }
            }
@@ -349,11 +362,20 @@ int main() {
                     ee.events = EPOLLIN ;
                     ee.data.fd = userfd;
                     epoll_ctl(epollfd, EPOLL_CTL_ADD, userfd, &ee);
-                    playersFd[numberPlayer]= userfd;
+                    int numergracza=0;
+                    for(int y = 0; y<5; y++){
+                        if(playersFd[y]==-1){
+                            numergracza = y;
+                            break;
+                        }
+                    }
+                    cout<<"---numergracza"<<numergracza<<" "<<numberPlayer<<endl;
+                    playersFd[numergracza]= userfd;
                     numberPlayer++;
                     write(userfd,"z,",2);
-                    cout<<"logowanie";
+                    cout<<"logowanie"<<endl;
                     if(numberPlayer == 1){
+                        cout<<"------ustawiamMaina"<<endl;
                         ustawMainPlayera(0);
                     }
                 }
@@ -402,21 +424,69 @@ int main() {
                             del = k;
                         }
                     }
+                    if(notStarted == true){
+                        for(int n =0; n<5; n++){
+                            if(playersFd[n] != -1){
+                                string x = "x" + to_string(del)+",";
+                                char w[3];
+                                strcpy(w, x.c_str());
+                                write(playersFd[n],w, 3);
+                            }
+                        }
+                    }
 					if(numberPlayer == 0){
+					    OdblokujWszystkich();
 						notStarted = true;
+						for(int p=0;p<5;p++){
+						    playersFd[p] = -1;
+                            savedMsgLength[p]=0;
+                            savedMsgBuffer[p]="";
+						}
+						currentPlayer = 0;
+                        temp = "";
+                        status = 0;
+                        iloscpodpowiedzi = 0;
+                        przegraneRundy=0;
+                        wtgraneRundy=0;
+//                        int iloscgier = 0;
+
 						//zeroanie serwera
 					}
 
                     epoll_ctl(epollfd, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     close(events[i].data.fd);
-                    if(currentPlayer == del){
+                    if(currentPlayer == del && numberPlayer>1){
                         //next Round
                         obsluz('i',0);
                     }
-                    if(numberPlayer == 1){
-                        write(playersFd[currentPlayer],"v,",2);
-                        notStarted = true;
-                        OdblokujWszystkich();
+                    if(numberPlayer == 1 && notStarted == false){
+
+                        for(int q =0;q<5;q++){
+                            if(playersFd[q] != -1){
+                                write(playersFd[q],"v,",2);
+                            }
+                        }
+//                        write(playersFd[currentPlayer],"v,",2);
+//                        notStarted = true;
+//                        OdblokujWszystkich();
+//                        playersFd[currentPlayer] = -1;
+//                        numberPlayer=0;
+//                        for(int p=0;p<5;p++){
+//                            playersFd[p] = -1;
+//                            savedMsgLength[p]=0;
+//                            savedMsgBuffer[p]="";
+//                        }
+//                        currentPlayer = 0;
+//                        temp = "";
+//                        status = 0;
+//                        iloscpodpowiedzi = 0;
+//                        przegraneRundy=0;
+//                        wtgraneRundy=0;
+////                        int iloscgier = 0;
+//
+//                        epoll_ctl(epollfd, EPOLL_CTL_DEL, events[currentPlayer].data.fd, NULL);
+//                        close(events[currentPlayer].data.fd);
+
                     }
                 }
             }

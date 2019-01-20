@@ -7,6 +7,7 @@ public class Stale {
     private static Socket socket;
     private static WriteKlient wk;
     private static ReadKlien rk;
+    private static int kliknal = 0;
 
 
     public static Socket getSocket() {
@@ -33,5 +34,13 @@ public class Stale {
 
     public static void setRk(ReadKlien rk) {
         Stale.rk = rk;
+    }
+
+    public static int getKliknal() {
+        return kliknal;
+    }
+
+    public static void setKliknal(int kliknal) {
+        Stale.kliknal = kliknal;
     }
 }

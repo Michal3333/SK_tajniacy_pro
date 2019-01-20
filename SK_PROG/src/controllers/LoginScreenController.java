@@ -23,6 +23,7 @@ public class LoginScreenController extends MainContoller{
     public Button button;
 
     public void conect(ActionEvent actionEvent) throws IOException {
+        Stale.setKliknal(1);
         String nick = nikcField.getText();
         Stale.setRk(new ReadKlien(this));
         Stale.setWk(new WriteKlient(nick));

@@ -34,8 +34,6 @@ public class LobbyController extends MainContoller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Stale.getRk().setPage(this);
-        gracz1.setText(Stale.getWk().getNick());
-        labels = 2;
         box.getSelectionModel().select(0); //domyślnie łatwy
         try {
             Stale.getWk().logIn();
@@ -50,35 +48,67 @@ public class LobbyController extends MainContoller implements Initializable {
 
     }
     @Override
-    public void uzupenijGracza(int playerType){
-        if(labels == 2){
-            gracz2.setText(Stale.getRk().getWiad());
-            labels++;
+    public void uzupenijGracza(int playerType, int numer, String nick){
+        System.out.println("wiadmosc w uzupelnij gracza " + Stale.getRk().getWiad());
+        if(numer == 0){
+            gracz1.setText(nick);
+
+            if(playerType == 1){
+                gracz1.textFillProperty().setValue(Color.ALICEBLUE);
+            }
+        }
+        if(numer == 1){
+            gracz2.setText(nick);
+
             if(playerType == 1){
                 gracz2.textFillProperty().setValue(Color.ALICEBLUE);
             }
         }
-        else if(labels == 3){
-            gracz3.setText(Stale.getRk().getWiad());
-            labels++;
+        else if(numer == 2){
+            gracz3.setText(nick);
+
             if(playerType == 1){
                 gracz3.textFillProperty().setValue(Color.ALICEBLUE);
             }
         }
-        else if(labels == 4){
-            gracz5.setText(Stale.getRk().getWiad());
-            labels++;
+        else if(numer == 3){
+            gracz5.setText(nick);
+
             if(playerType == 1){
                 gracz4.textFillProperty().setValue(Color.ALICEBLUE);
             }
         }
-        else if(labels == 5){
-            gracz5.setText(Stale.getRk().getWiad());
-            labels++;
+        else if(numer == 4){
+            gracz5.setText(nick);
+
             if(playerType == 1){
                 gracz5.textFillProperty().setValue(Color.ALICEBLUE);
             }
         }
+    }
+
+    public void usunUzupelnieniGracza(int numer){
+        if(numer == 0){
+            gracz1.setText("");
+
+        }
+        if(numer == 1){
+            gracz2.setText("");
+
+        }
+        else if(numer == 2){
+            gracz3.setText("");
+
+        }
+        else if(numer == 3){
+            gracz5.setText("");
+
+        }
+        else if(numer == 4){
+            gracz5.setText("");
+
+        }
+
     }
 
     @Override
