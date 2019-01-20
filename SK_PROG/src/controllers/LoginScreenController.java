@@ -68,4 +68,8 @@ public class LoginScreenController extends MainContoller implements Initializabl
     }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        info.setVisible(false);
+    }
 }
