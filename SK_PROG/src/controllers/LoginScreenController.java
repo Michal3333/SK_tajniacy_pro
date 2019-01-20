@@ -37,7 +37,7 @@ public class LoginScreenController extends MainContoller implements Initializabl
     public void conect(ActionEvent actionEvent) throws IOException {
         Stale.setKliknal(1);
         String nick = nikcField.getText();
-        Stale.setSocket(new Socket((InetAddress.getText().equals("") ?  InetAddress.getText() : "127.0.0.1"), (Port.getText().equals("") ?  Integer.parseInt(Port.getText()) : 1234)));
+        Stale.setSocket(new Socket((InetAddress.getText()=="" ?  InetAddress.getText() : "127.0.0.1"), (Port.getText()=="" ?  Integer.parseInt(Port.getText()) : 1234)));
         Stale.setRk(new ReadKlien(this));
         Stale.setWk(new WriteKlient(nick));
         Stale.getRk().ropocnij();
@@ -47,7 +47,8 @@ public class LoginScreenController extends MainContoller implements Initializabl
     private Scene utwurzLobby() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/Lobby.fxml"));
         Parent root = loader.load();
-        return new Scene(root);
+        Scene scene = new Scene(root);
+        return scene;
     }
 
     public void zostanPrzyjety(){
@@ -68,8 +69,5 @@ public class LoginScreenController extends MainContoller implements Initializabl
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        info.setVisible(false);
-    }
+
 }

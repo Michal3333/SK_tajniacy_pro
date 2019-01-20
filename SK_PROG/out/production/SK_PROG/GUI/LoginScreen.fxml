@@ -13,5 +13,6 @@
     <TextField fx:id="nikcField" layoutX="63.0" layoutY="251.0" prefWidth="150.0" promptText="NickName" />
     <TextField fx:id="InetAddress" layoutX="63.0" layoutY="112.0" prefWidth="150.0" promptText="Inet Adress" />
     <TextField fx:id="Port" layoutX="63.0" layoutY="178.0" prefWidth="150.0" promptText="Port" />
+    <Label fx:id="info" layoutX="272.0" layoutY="243.0" prefHeight="38.0" prefWidth="143.0" text="Gra w trakcie     Dołącz do następnej!" textAlignment="CENTER" wrapText="true" />
   </children>
 </AnchorPane>
