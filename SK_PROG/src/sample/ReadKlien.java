@@ -39,7 +39,7 @@ public class ReadKlien implements Runnable{
 
 
     public ReadKlien(LoginScreenController page1) throws IOException {
-        Stale.setSocket(new Socket("127.0.0.1", 1234));
+       // Stale.setSocket(new Socket("127.0.0.1", 1234));
         is = Stale.getSocket().getInputStream();
         tab = new byte[42];
         runda =0;

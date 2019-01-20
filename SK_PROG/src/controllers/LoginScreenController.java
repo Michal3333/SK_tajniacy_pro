@@ -14,6 +14,7 @@ import sample.Stale;
 import sample.WriteKlient;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class LoginScreenController extends MainContoller{
 
@@ -21,10 +22,13 @@ public class LoginScreenController extends MainContoller{
     public static Stage stage;
     public TextField nikcField;
     public Button button;
+    public TextField InetAddress;
+    public TextField Port;
 
     public void conect(ActionEvent actionEvent) throws IOException {
         Stale.setKliknal(1);
         String nick = nikcField.getText();
+        Stale.setSocket(new Socket((InetAddress.getText()=="" ?  InetAddress.getText() : "127.0.0.1"), (Port.getText()=="" ?  Integer.parseInt(Port.getText()) : 1234)));
         Stale.setRk(new ReadKlien(this));
         Stale.setWk(new WriteKlient(nick));
         Stale.getRk().ropocnij();
