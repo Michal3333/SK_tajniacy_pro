@@ -389,6 +389,7 @@ int main(int argc, char ** argv) {
                     userfd = accept(serwersock, (struct sockaddr*) &sck_user, &ntmp );
                     oczekujacy[liczbaOczekujacych] = userfd;
                     write(userfd,"c,",2);
+					liczbaOczekujacych++;
                 }
             }
             else{
