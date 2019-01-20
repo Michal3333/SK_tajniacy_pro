@@ -129,7 +129,8 @@ public class ReadKlien implements Runnable{
 
         }
         if(firstletter.equals("x")){
-            Platform.runLater(() -> page.usunUzupelnieniGracza(Integer.parseInt(wiad)));
+			int numer = Integer.parseInt(wiad);
+            Platform.runLater(() -> page.usunUzupelnieniGracza(numer));
         }
         if(firstletter.equals("b")){
             Platform.runLater(() -> page.odblokuj());
@@ -158,7 +159,7 @@ public class ReadKlien implements Runnable{
         if(firstletter.equals("m")){
 
             master = 1;
-//            Platform.runLater(() -> page.setAsMaster());
+            Platform.runLater(() -> page.setAsMaster());
 
         }
 //        if(firstletter.equals("r")){
@@ -239,6 +240,7 @@ public class ReadKlien implements Runnable{
             }
         }
         else if(firstletter.equals("w")){
+			iloscRund++;
             for(int i=0; i < wiad.length()/2;i++){
                 int odp = Integer.parseInt(wiad.substring(2*i,2*i+2));
                 zgadniete.set(odp,1);

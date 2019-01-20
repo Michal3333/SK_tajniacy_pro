@@ -455,10 +455,19 @@ int main() {
 
                     epoll_ctl(epollfd, EPOLL_CTL_DEL, events[i].data.fd, NULL);
                     close(events[i].data.fd);
-                    if(currentPlayer == del && numberPlayer>1){
+                    if(currentPlayer == del && numberPlayer>1 && notStarted == false){
                         //next Round
                         obsluz('i',0);
                     }
+					if(currentPlayer == del && notStarted && numberPlayer>0){
+                        for(int e =0; e < 5; e++ ){
+                            if(playersFd[e] != -1){
+                                ustawMainPlayera(e);
+                                break;
+                            }
+                        }
+                    }
+					
                     if(numberPlayer == 1 && notStarted == false){
 
                         for(int q =0;q<5;q++){

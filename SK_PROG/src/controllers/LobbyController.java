@@ -113,7 +113,9 @@ public class LobbyController extends MainContoller implements Initializable {
 
     @Override
     public void setAsMaster(){
-        gracz1.textFillProperty().setValue(Color.ALICEBLUE);
+		box.setVisible(true);
+        poziom.setVisible(true);
+        rozpocznijButton.setDisable(false);
     }
 
     public void rozpocznij(ActionEvent actionEvent) throws IOException {
