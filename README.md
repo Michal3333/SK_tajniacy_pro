@@ -1,2 +1,2 @@
 # SK_tajniacy_pro
-#obecnie projekt w najbardziej zaawansowanej formie jest na michalBranch
+Najnowsza wersja projektu znajduje się na Masterze.
